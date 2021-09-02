@@ -1,0 +1,81 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "db",
+    "options": {
+      "emailVerificationRequired": true
+    }
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Note": {
+    "dataSource": "db"
+  },
+  "Item": {
+    "dataSource": "vn"
+  },
+  "ItemTag": {
+    "dataSource": "vn"
+  },
+  "ItemType": {
+    "dataSource": "vn"
+  },
+  "Tag": {
+    "dataSource": "vn"
+  },
+  "Buy": {
+    "dataSource": "vn"
+  },
+  "Inbound": {
+    "dataSource": "vn"
+  },
+  "Customer": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Order": {
+    "dataSource": "db",
+    "public": true
+  },
+  "OrderRow": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Email": {
+    "dataSource": "email"
+  },
+  "Post": {
+    "dataSource": "db",
+    "public": true
+  }
+}

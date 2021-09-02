@@ -1,0 +1,42 @@
+{
+  "name": "ItemType",
+  "base": "PersistedModel",
+  "options": {
+    "mysql": {
+      "table": "itemType"
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "Number",
+      "id": true,
+      "description": "Identifier"
+    },
+    "code": {
+      "type": "String"
+    },
+    "name": {
+      "type": "String"
+    },
+    "life": {
+      "type": "Number"
+    },
+    "isPackaging": {
+      "type": "Boolean"
+    },
+    "categoryFk": {
+      "type": "Number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}
