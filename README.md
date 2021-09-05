@@ -1,4 +1,4 @@
-# Canini
+# Florini
 
 Source code of Canini website.
 
