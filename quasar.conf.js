@@ -1,18 +1,13 @@
 // Configuration for your app
+const env = require('quasar-dotenv').config()
 
 module.exports = function (ctx) {
   return {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
-    boot: [
-      'i18n',
-      'axios',
-      'error-handler'
-    ],
+    boot: ['i18n', 'axios', 'error-handler'],
 
-    css: [
-      'app.styl'
-    ],
+    css: ['app.styl'],
 
     extras: [
       'roboto-font',
@@ -57,14 +52,10 @@ module.exports = function (ctx) {
         'QPageScroller'
       ],
 
-      directives: [
-        'Ripple'
-      ],
+      directives: ['Ripple'],
 
       // Quasar plugins
-      plugins: [
-        'Notify'
-      ]
+      plugins: ['Notify']
 
       // iconSet: 'ionicons-v4'
       // lang: 'de' // Quasar language
@@ -73,7 +64,8 @@ module.exports = function (ctx) {
     supportIE: false,
 
     build: {
-      scopeHoisting: true
+      scopeHoisting: true,
+      env: env
       // vueRouterMode: 'history',
       // vueCompiler: true,
       // gzip: true,
@@ -86,7 +78,7 @@ module.exports = function (ctx) {
       //   loader: 'eslint-loader',
       //   exclude: /node_modules/
       //   })
-      // }
+      // },
     },
 
     devServer: {
@@ -118,25 +110,29 @@ module.exports = function (ctx) {
         theme_color: '#343434',
         icons: [
           {
-            'src': 'statics/icons/icon-128x128.png',
-            'sizes': '128x128',
-            'type': 'image/png'
-          }, {
-            'src': 'statics/icons/icon-192x192.png',
-            'sizes': '192x192',
-            'type': 'image/png'
-          }, {
-            'src': 'statics/icons/icon-256x256.png',
-            'sizes': '256x256',
-            'type': 'image/png'
-          }, {
-            'src': 'statics/icons/icon-384x384.png',
-            'sizes': '384x384',
-            'type': 'image/png'
-          }, {
-            'src': 'statics/icons/icon-512x512.png',
-            'sizes': '512x512',
-            'type': 'image/png'
+            src: 'statics/icons/icon-128x128.png',
+            sizes: '128x128',
+            type: 'image/png'
+          },
+          {
+            src: 'statics/icons/icon-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: 'statics/icons/icon-256x256.png',
+            sizes: '256x256',
+            type: 'image/png'
+          },
+          {
+            src: 'statics/icons/icon-384x384.png',
+            sizes: '384x384',
+            type: 'image/png'
+          },
+          {
+            src: 'statics/icons/icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png'
           }
         ]
       }
@@ -153,19 +149,16 @@ module.exports = function (ctx) {
       },
       packager: {
         // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
-
         // OS X / Mac App Store
         // appBundleId: '',
         // appCategoryType: '',
         // osxSign: '',
         // protocol: 'myapp://path',
-
         // Window only
         // win32metadata: { ... }
       },
       builder: {
         // https://www.electron.build/configuration/configuration
-
         // appId: 'quasar-app'
       }
     }

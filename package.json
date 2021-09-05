@@ -18,6 +18,7 @@
     "axios": "^0.18.1",
     "localforage": "^1.7.3",
     "quasar": "^1.10.0",
+    "quasar-dotenv": "^1.0.5",
     "vue-i18n": "^7.3.3",
     "vuex-persist": "^2.1.1"
   },

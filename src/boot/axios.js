@@ -2,6 +2,7 @@ import axios from 'axios'
 
 export default async ({ app, Vue }) => {
   // Vue.prototype.$apiBase = `//${location.hostname}:${location.port}/api/`
+
   Vue.prototype.$apiBase = process.env.DEV
     ? process.env.API.replace(/"/g, '')
     : `//api.${
