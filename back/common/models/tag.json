@@ -25,6 +25,12 @@
     "unit": {
       "type": "String"
     },
+    "code": {
+      "type": "String"
+    },
+    "overWrite": {
+      "type": "String"
+    },
     "isQuantitative": {
       "type": "Boolean",
       "mysql": {
@@ -33,7 +39,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "itemTags": {
+      "type": "hasMany",
+      "model": "ItemTag",
+      "foreignKey": "tagFk"
+    }
+  },
   "acls": [
     {
       "accessType": "READ",

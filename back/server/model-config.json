@@ -42,16 +42,16 @@
     "dataSource": "db"
   },
   "Item": {
-    "dataSource": "vn"
+    "dataSource": "db"
   },
   "ItemTag": {
-    "dataSource": "vn"
+    "dataSource": "db"
   },
   "ItemType": {
-    "dataSource": "vn"
+    "dataSource": "db"
   },
   "Tag": {
-    "dataSource": "vn"
+    "dataSource": "db"
   },
   "Buy": {
     "dataSource": "vn"
@@ -75,6 +75,10 @@
     "dataSource": "email"
   },
   "Post": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ItemCategory": {
     "dataSource": "db",
     "public": true
   }

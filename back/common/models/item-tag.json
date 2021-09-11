@@ -15,6 +15,9 @@
     "value": {
       "type": "String"
     },
+    "intValue": {
+      "type": "Number"
+    },
     "itemFk": {
       "type": "Number",
       "required": true

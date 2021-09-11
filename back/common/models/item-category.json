@@ -1,0 +1,60 @@
+{
+  "name": "ItemCategory",
+  "plural": "ItemCategories",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "mysql": {
+      "table": "itemCategory"
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "Number",
+      "id": true,
+      "description": "Identifier"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "order": {
+      "type": "number"
+    },
+    "display": {
+      "type": "number",
+      "required": true
+    },
+    "color": {
+      "type": "string"
+    },
+    "shortLife": {
+      "type": "number",
+      "required": true
+    },
+    "merchandise": {
+      "type": "boolean",
+      "required": true
+    },
+    "icon": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "isReclining": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "itemTypes": {
+      "type": "hasMany",
+      "model": "ItemType",
+      "foreignKey": "categoryFk"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

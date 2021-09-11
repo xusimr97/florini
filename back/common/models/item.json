@@ -58,6 +58,12 @@
     "subName": {
       "type": "String"
     },
+    "stars": {
+      "type": "Number"
+    },
+    "quality": {
+      "type": "String"
+    },
     "tag5": {
       "type": "String"
     },

@@ -29,7 +29,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "itemCategory": {
+      "type": "belongsTo",
+      "model": "ItemCategory",
+      "foreignKey": "categoryFk"
+    },
+    "items": {
+      "type": "hasMany",
+      "model": "Item",
+      "foreignKey": "typeFk"
+    }
+  },
   "acls": [
     {
       "accessType": "READ",
