@@ -20,12 +20,6 @@
     "name_en": {
       "type": "String"
     },
-    "description_es": {
-      "type": "String"
-    },
-    "description_en": {
-      "type": "String"
-    },
     "order": {
       "type": "number"
     },

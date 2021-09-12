@@ -51,7 +51,7 @@ async function main () {
       console.log('Tag: ' + tag.name + '\n')
       var tagQuery = {
         id: tag.id,
-        name: tag.name,
+        name_es: tag.name,
         isFree: tag.isFree,
         sourceTable: tag.sourceTable,
         unit: tag.unit,
@@ -59,7 +59,7 @@ async function main () {
         overWrite: tag.overWrite,
         isQuantitatif: tag.isQuantitatif
       }
-      await db.query('INSERT IGNORE INTO tag SET ?', tagQuery)
+      await db.query('INSERT IGNORE INTO Tag SET ?', tagQuery)
     }
 
     const vnItemCategories = await vn.query(
@@ -72,7 +72,7 @@ async function main () {
       var itemCategoryQuery = {
         id: itemCategory.id,
         code: itemCategory.code,
-        name: itemCategory.name,
+        name_es: itemCategory.name,
         order: itemCategory.order,
         display: itemCategory.display,
         color: itemCategory.color,
@@ -81,7 +81,7 @@ async function main () {
         icon: itemCategory.icon,
         isReclining: itemCategory.isReclining
       }
-      await db.query('INSERT IGNORE INTO itemCategory SET ?', itemCategoryQuery)
+      await db.query('INSERT IGNORE INTO ItemCategory SET ?', itemCategoryQuery)
 
       const vnItemTypes = await vn.query(
         'SELECT * FROM itemType WHERE categoryFk=' + itemCategory.id
@@ -93,13 +93,13 @@ async function main () {
         var itemTypeQuery = {
           id: itemType.id,
           code: itemType.code,
-          name: itemType.name,
+          name_es: itemType.name,
           life: itemType.life,
           isPackaging: itemType.isPackaging,
           categoryFk: itemType.categoryFk
         }
 
-        await db.query('INSERT IGNORE INTO itemType SET ?', itemTypeQuery)
+        await db.query('INSERT IGNORE INTO ItemType SET ?', itemTypeQuery)
 
         const vnItems = await vn.query(
           'SELECT * FROM item WHERE typeFk=' +
@@ -113,12 +113,12 @@ async function main () {
           console.log('   Item: ' + item.name + '\n')
           var itemQuery = {
             id: item.id,
-            name: item.name,
+            name_es: item.name,
             size: item.size,
             category: item.category,
             typeFk: item.typeFk,
             stems: item.stems,
-            description: item.description,
+            description_es: item.description,
             isOnOffer: item.isOnOffer,
             isBargain: item.isBargain,
             isActive: item.isActive,
@@ -141,7 +141,7 @@ async function main () {
             tag10: item.tag10,
             value10: item.value10
           }
-          await db.query('INSERT IGNORE INTO item SET ?', itemQuery)
+          await db.query('INSERT IGNORE INTO Item SET ?', itemQuery)
 
           const vnItemTags = await vn.query(
             'SELECT * FROM itemTag WHERE itemFk=' + item.id + ''
@@ -156,7 +156,7 @@ async function main () {
               tagFk: itemTag.tagFk,
               priority: itemTag.priority
             }
-            await db.query('INSERT IGNORE INTO itemTag SET ?', itemTagQuery)
+            await db.query('INSERT IGNORE INTO ItemTag SET ?', itemTagQuery)
           }
         }
       }
