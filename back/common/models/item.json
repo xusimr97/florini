@@ -3,7 +3,7 @@
   "base": "PersistedModel",
   "options": {
     "mysql": {
-      "table": "item"
+      "table": "Item"
     }
   },
   "properties": {
@@ -12,7 +12,16 @@
       "id": true,
       "description": "Identifier"
     },
-    "name": {
+    "name_es": {
+      "type": "String"
+    },
+    "name_en": {
+      "type": "String"
+    },
+    "description_es": {
+      "type": "String"
+    },
+    "description_en": {
       "type": "String"
     },
     "size": {
@@ -27,9 +36,6 @@
     },
     "stems": {
       "type": "Number"
-    },
-    "description": {
-      "type": "String"
     },
     "isOnOffer": {
       "type": "Boolean"

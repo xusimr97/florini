@@ -3,7 +3,7 @@
   "base": "PersistedModel",
   "options": {
     "mysql": {
-      "table": "tag"
+      "table": "Tag"
     }
   },
   "properties": {
@@ -12,9 +12,11 @@
       "id": true,
       "description": "Identifier"
     },
-    "name": {
-      "type": "String",
-      "required": true
+    "name_es": {
+      "type": "String"
+    },
+    "name_en": {
+      "type": "String"
     },
     "isFree": {
       "type": "Boolean"

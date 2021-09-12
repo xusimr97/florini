@@ -3,7 +3,7 @@
   "base": "PersistedModel",
   "options": {
     "mysql": {
-      "table": "itemTag"
+      "table": "ItemTag"
     }
   },
   "properties": {

@@ -5,7 +5,7 @@
   "idInjection": true,
   "options": {
     "mysql": {
-      "table": "itemCategory"
+      "table": "ItemCategory"
     }
   },
   "properties": {
@@ -14,9 +14,17 @@
       "id": true,
       "description": "Identifier"
     },
-    "name": {
-      "type": "string",
-      "required": true
+    "name_es": {
+      "type": "String"
+    },
+    "name_en": {
+      "type": "String"
+    },
+    "description_es": {
+      "type": "String"
+    },
+    "description_en": {
+      "type": "String"
     },
     "order": {
       "type": "number"

@@ -4,14 +4,14 @@
   "idInjection": true,
   "options": {
     "mysql": {
-      "table": "order"
+      "table": "Order"
     }
   },
   "properties": {
     "id": {
       "type": "Number",
       "id": true,
-      "generated": true
+      "description": "Identifier"
     },
     "price": {
       "type": "Number"

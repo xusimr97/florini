@@ -3,7 +3,7 @@
   "base": "PersistedModel",
   "options": {
     "mysql": {
-      "table": "itemType"
+      "table": "ItemType"
     }
   },
   "properties": {
@@ -15,7 +15,10 @@
     "code": {
       "type": "String"
     },
-    "name": {
+    "name_es": {
+      "type": "String"
+    },
+    "name_en": {
       "type": "String"
     },
     "life": {

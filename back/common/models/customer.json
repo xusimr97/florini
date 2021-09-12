@@ -22,6 +22,14 @@
       "type": "hasMany",
       "model": "Order",
       "foreignKey": "customerId"
+    },
+    "accessTokens": {
+      "type": "hasMany",
+      "model": "AccessToken",
+      "foreignKey": "userId",
+      "options": {
+        "disableInclude": true
+      }
     }
   },
   "acls": [

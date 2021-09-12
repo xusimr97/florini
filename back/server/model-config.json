@@ -15,7 +15,14 @@
   },
   "AccessToken": {
     "dataSource": "db",
-    "public": false
+    "public": false,
+    "relations": {
+      "user": {
+        "type": "belongsTo",
+        "model": "Customer",
+        "foreignKey": "userId"
+      }
+    }
   },
   "ACL": {
     "dataSource": "db",
@@ -31,9 +38,6 @@
   "Role": {
     "dataSource": "db",
     "public": false
-  },
-  "Note": {
-    "dataSource": "db"
   },
   "Item": {
     "dataSource": "db"

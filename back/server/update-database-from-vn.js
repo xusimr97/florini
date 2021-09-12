@@ -4,6 +4,8 @@ const util = require('util')
 const dsConfig = require('./datasources.local.json')
 
 // Declare Data
+const limitItems = 10
+
 const vnConfig = {
   host: dsConfig.vn.host,
   user: dsConfig.vn.username,
@@ -20,7 +22,6 @@ const dbConfig = {
 }
 const vn = makeDb(vnConfig)
 const db = makeDb(dbConfig)
-const limitItems = 50
 
 let processStatus = 0
 let totalItems = 0

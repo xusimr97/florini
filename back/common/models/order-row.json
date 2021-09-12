@@ -3,14 +3,14 @@
   "base": "PersistedModel",
   "options": {
     "mysql": {
-      "table": "orderRow"
+      "table": "OrderRow"
     }
   },
   "properties": {
     "id": {
       "type": "Number",
       "id": true,
-      "generated": true
+      "description": "Identifier"
     },
     "orderId": {
       "type": "Number",
@@ -20,15 +20,19 @@
       "type": "Number",
       "required": true
     },
-    "price": {
-      "type": "Number",
-      "required": true
-    },
     "quantity": {
       "type": "Number",
       "required": true
     },
-    "concept": {
+    "itemName": {
+      "type": "String",
+      "required": true
+    },
+    "itemDescription": {
+      "type": "String",
+      "required": true
+    },
+    "itemImage": {
       "type": "String",
       "required": true
     }

@@ -4,7 +4,7 @@
   "idInjection": true,
   "options": {
     "mysql": {
-      "table": "post"
+      "table": "Post"
     },
     "validateUpsert": true
   },
@@ -12,18 +12,29 @@
     "id": {
       "type": "Number",
       "id": true,
-      "generated": true
+      "description": "Identifier"
     },
     "image": {
       "type": "string",
       "required": true
     },
-    "text": {
+    "text_es": {
+      "type": "string"
+    },
+    "text_en": {
       "type": "string"
     },
     "type": {
       "type": "string",
       "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "state": {
+      "type": "Boolean",
+      "default": 1
     }
   },
   "validations": [],
