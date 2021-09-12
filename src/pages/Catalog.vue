@@ -1,24 +1,40 @@
 <template>
   <div>
     <q-drawer v-model="rightDrawerOpen" side="right" elevated>
-      <!-- <q-list>
+      <q-list>
         <q-item-label header>{{ $t("categories") }}</q-item-label>
-        <q-item
-          clickable
-          v-for="category in categories"
-          :key="category.icon"
-          :to="{ name: 'catalog', params: { type: category.id } }"
+        <q-expansion-item
+          expand-separator
+          v-for="category in itemCategories"
+          :key="category.id"
+          :label="category[`name_${$i18n.locale}`]"
         >
-          <q-item-section>
-            <q-item-label>{{ category.name }}</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list> -->
+          <q-item
+            v-for="itemType in category.itemTypes"
+            :key="itemType.id"
+            :to="{ name: 'catalog', params: { type: itemType.id } }"
+            :inset-level="0.5"
+          >
+            <q-item-section>
+              <q-item-label>{{
+                itemType[`name_${$i18n.locale}`]
+              }}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-expansion-item>
+      </q-list>
     </q-drawer>
+
     <div class="q-pa-md row justify-center q-gutter-md">
       <q-spinner v-if="isLoading" color="primary" size="50px"> </q-spinner>
       <q-card class="my-card" v-for="item in items" :key="item.id">
-        <img :src="imageUrl + item.image" />
+        <q-img
+          :src="imageUrl + item.image"
+          placeholder-src="statics/resources/noticia-1.png"
+          basic
+          class="item-img"
+        >
+        </q-img>
         <q-card-section>
           <div class="name text-h6">{{ item[`name_${$i18n.locale}`] }}</div>
           <q-rating size="24px" v-model="item.stars" :max="5" />
@@ -35,6 +51,19 @@
         </q-card-actions>
       </q-card>
     </div>
+
+    <q-page-sticky
+      position="bottom-right"
+      :offset="[18, 18]"
+      v-if="$q.platform.is.mobile"
+    >
+      <q-btn
+        round
+        icon="fas fa-filter"
+        color="primary"
+        @click="rightDrawerOpen = !rightDrawerOpen"
+      />
+    </q-page-sticky>
   </div>
 </template>
 
@@ -49,6 +78,9 @@
   .description
     height 40px
     overflow hidden
+  .item-img
+    height 250px
+    max-width 100%
 </style>
 
 <script>
@@ -68,13 +100,20 @@ export default {
   },
   async mounted() {
     try {
-      console.log(this.$i18n.locale);
       this.isLoading = true;
       let response;
       response = await this.$axios.get("ItemCategories");
       this.itemCategories = response.data;
-      this.itemCategory = this.itemCategories[0].id;
-      await this.loadCategory(this.itemCategory);
+
+      response = await this.$axios.get("ItemTypes");
+
+      this.itemCategories.forEach(itemCategory => {
+        itemCategory.itemTypes = response.data.filter(
+          itemType => itemType.categoryFk === itemCategory.id
+        );
+      });
+
+      await this.loadType(this.itemCategories[0].itemTypes[0].id);
     } catch (error) {
       this.$q.notify({
         message: this.$t(error.message),
@@ -90,29 +129,6 @@ export default {
     }
   },
   methods: {
-    async loadCategory(category, showLoading = false) {
-      try {
-        if (showLoading) {
-          this.isLoading = true;
-        }
-        this.itemTypes = [];
-        this.itemType = null;
-        let params = { filter: { where: { categoryFk: category } } };
-        let response = await this.$axios.get("ItemTypes", { params });
-        this.itemTypes = response.data;
-        this.itemType = this.itemTypes[0].id;
-        await this.loadType(this.itemType);
-      } catch (error) {
-        this.$q.notify({
-          message: this.$t(error.message),
-          type: "negative"
-        });
-      } finally {
-        if (showLoading) {
-          this.isLoading = false;
-        }
-      }
-    },
     async loadType(type, showLoading = false) {
       try {
         if (showLoading) {

@@ -128,7 +128,7 @@ async function main () {
             image: item.image,
             longName: item.longName,
             subName: item.subName,
-            stars: item.stars,
+            stars: item.stars ? item.stars : 0,
             quality: item.quality,
             tag5: item.tag5,
             value5: item.value5,

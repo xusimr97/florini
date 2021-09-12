@@ -49,7 +49,8 @@ module.exports = function (ctx) {
         'QSeparator',
         'QImg',
         'QPageSticky',
-        'QPageScroller'
+        'QPageScroller',
+        'QExpansionItem'
       ],
 
       directives: ['Ripple'],
