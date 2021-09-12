@@ -19,6 +19,8 @@ export default {
   login: 'Iniciar sesión',
   visitor: 'Visitante',
   logout: 'Cerrar sesión',
+  noResults: 'No hay resultados',
+
 
   // Menu
   home: 'Inicio',

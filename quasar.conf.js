@@ -50,10 +50,11 @@ module.exports = function (ctx) {
         'QImg',
         'QPageSticky',
         'QPageScroller',
-        'QExpansionItem'
+        'QExpansionItem',
+        'QMenu'
       ],
 
-      directives: ['Ripple'],
+      directives: ['Ripple', 'ClosePopup'],
 
       // Quasar plugins
       plugins: ['Notify']
