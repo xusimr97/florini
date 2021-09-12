@@ -1,11 +1,12 @@
 {
-  "login failed": "Login failed",
-  "is blank": "Cannot be blank",
-  "is invalid": "Invalid value",
-  "can't be blank": "Field cannot be blank",
-  "invalidData": "Invalid data",
-  "invalidEmail": "Invalid email",
-  "passwordEmpty": "Password cannot be empty",
-  "passwordRequeriments": "Password doesn't meet requirements",
-  "notUniqueEmail": "User already exists"
+	"login failed": "Login failed",
+	"is blank": "Cannot be blank",
+	"is invalid": "Invalid value",
+	"can't be blank": "Field cannot be blank",
+	"invalidData": "Invalid data",
+	"invalidEmail": "Invalid email",
+	"passwordEmpty": "Password cannot be empty",
+	"passwordRequeriments": "Password doesn't meet requirements",
+	"notUniqueEmail": "User already exists",
+	"Authorization Required": "Authorization Required"
 }

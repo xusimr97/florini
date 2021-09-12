@@ -13,12 +13,6 @@
       "./mixins"
     ]
   },
-  "User": {
-    "dataSource": "db",
-    "options": {
-      "emailVerificationRequired": true
-    }
-  },
   "AccessToken": {
     "dataSource": "db",
     "public": false

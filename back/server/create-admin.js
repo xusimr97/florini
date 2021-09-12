@@ -41,7 +41,7 @@ async function main () {
 
     // console.log(role.principals)
 
-    const RoleMapping = await util
+    const roleMapping = await util
       .promisify(role.principals.findOne)
       .call(role.principals, {
         where: {
@@ -49,9 +49,9 @@ async function main () {
         }
       })
 
-    if (!RoleMapping) {
+    if (!roleMapping) {
       await util.promisify(role.principals.create).call(role.principals, {
-        principalType: 'Customer',
+        principalType: RoleMapping.USER,
         principalId: user.id
       })
     }
