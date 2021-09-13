@@ -37,10 +37,10 @@
         </q-img>
         <q-card-section>
           <div class="name text-h6">{{ item[`name_${$i18n.locale}`] }}</div>
-          <q-rating size="24px" v-model="item.stars" :max="5" />
+          <q-rating size="24px" v-model="item.stars" :max="5" readonly/>
         </q-card-section>
         <q-card-section class="description">
-          {{ item.description }}
+          {{ item[`description_${$i18n.locale}`] }}
         </q-card-section>
         <q-card-section>
           {{ item.price | currency }}

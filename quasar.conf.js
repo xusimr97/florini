@@ -85,7 +85,7 @@ module.exports = function (ctx) {
 
     devServer: {
       // https: true,
-      // port: 8080,
+      port: 8000,
       open: true, // opens browser window automatically
       proxy: {
         '/api': 'http://localhost:3000'
