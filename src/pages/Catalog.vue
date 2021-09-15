@@ -25,7 +25,11 @@
       </q-list>
     </q-drawer>
 
-    <div class="q-pa-md row justify-center q-gutter-md">
+    <!-- Desktop -->
+    <div
+      class="q-pa-md row justify-center q-gutter-md container"
+      v-if="$q.platform.is.desktop"
+    >
       <q-spinner v-if="isLoading" color="primary" size="50px"> </q-spinner>
       <q-card class="my-card" v-for="item in items" :key="item.id">
         <q-img
@@ -37,7 +41,7 @@
         </q-img>
         <q-card-section>
           <div class="name text-h6">{{ item[`name_${$i18n.locale}`] }}</div>
-          <q-rating size="24px" v-model="item.stars" :max="5" readonly/>
+          <q-rating size="24px" v-model="item.stars" :max="5" readonly />
         </q-card-section>
         <q-card-section class="description">
           {{ item[`description_${$i18n.locale}`] }}
@@ -49,6 +53,33 @@
           <q-btn flat>{{ $t("more") }}</q-btn>
           <q-btn flat>{{ $t("buy") }}</q-btn>
         </q-card-actions>
+      </q-card>
+    </div>
+
+    <!-- Mobile -->
+    <div class="q-pa-md container" v-else>
+      <q-spinner v-if="isLoading" color="primary" size="50px"> </q-spinner>
+      <q-card v-for="item in items" :key="item.id" class="row q-mb-sm my-card-mobile">
+        <q-img
+          :src="imageUrl + item.image"
+          placeholder-src="statics/resources/noticia-1.png"
+          basic
+          class="mobile-item-img col-4"
+          :img-style="{ 'background-size': 'contain' }"
+        >
+        </q-img>
+        <div class="col-8 q-pa-sm">
+          <div>
+            <div class="name text-subtitle1">{{ item[`name_${$i18n.locale}`] }}</div>
+            <q-rating size="18px" v-model="item.stars" :max="5" readonly />
+          </div>
+          <div class="description">
+            {{ item[`description_${$i18n.locale}`] }}
+          </div>
+          <div>
+            {{ item.price | currency }}
+          </div>
+        </div>
       </q-card>
     </div>
 
@@ -79,8 +110,20 @@
     height 40px
     overflow hidden
   .item-img
-    height 250px
     max-width 100%
+    height 250px
+
+.my-card-mobile
+  .name
+    white-space nowrap
+    overflow hidden
+    text-overflow ellipsis
+  .description
+    height 40px
+    overflow hidden
+  .mobile-item-img
+    height 150px
+    background-color #f8f8f8
 </style>
 
 <script>
