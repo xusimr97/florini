@@ -31,7 +31,12 @@
       v-if="$q.platform.is.desktop"
     >
       <q-spinner v-if="isLoading" color="primary" size="50px"> </q-spinner>
-      <q-card class="my-card" v-for="item in items" :key="item.id">
+      <q-card
+        class="my-card"
+        v-for="item in items"
+        :key="item.id"
+        @click="$router.push({ name: 'item', params: { id: item.id } })"
+      >
         <q-img
           :src="imageUrl + item.image"
           placeholder-src="statics/resources/noticia-1.png"
@@ -49,17 +54,22 @@
         <q-card-section>
           {{ item.price | currency }}
         </q-card-section>
-        <q-card-actions class="justify-end">
+        <!-- <q-card-actions class="justify-end">
           <q-btn flat>{{ $t("more") }}</q-btn>
           <q-btn flat>{{ $t("buy") }}</q-btn>
-        </q-card-actions>
+        </q-card-actions> -->
       </q-card>
     </div>
 
     <!-- Mobile -->
     <div class="q-pa-md container" v-else>
       <q-spinner v-if="isLoading" color="primary" size="50px"> </q-spinner>
-      <q-card v-for="item in items" :key="item.id" class="row q-mb-sm my-card-mobile">
+      <q-card
+        v-for="item in items"
+        :key="item.id"
+        class="row q-mb-sm my-card-mobile"
+        @click="$router.push({ name: 'item', params: { id: item.id } })"
+      >
         <q-img
           :src="imageUrl + item.image"
           placeholder-src="statics/resources/noticia-1.png"
@@ -70,7 +80,9 @@
         </q-img>
         <div class="col-8 q-pa-sm">
           <div>
-            <div class="name text-subtitle1">{{ item[`name_${$i18n.locale}`] }}</div>
+            <div class="name text-subtitle1">
+              {{ item[`name_${$i18n.locale}`] }}
+            </div>
             <q-rating size="18px" v-model="item.stars" :max="5" readonly />
           </div>
           <div class="description">
