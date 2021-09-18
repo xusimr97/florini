@@ -119,5 +119,13 @@
   "Rating": {
     "dataSource": "db",
     "public": true
+  },
+  "Category": {
+    "dataSource": "db",
+    "public": true
+  },
+  "CategoryTranslation": {
+    "dataSource": "db",
+    "public": true
   }
 }

@@ -1,15 +1,23 @@
 {
-  "name": "Product",
-  "plural": "Products",
+  "name": "CategoryTranslation",
+  "plural": "CategoryTranslations",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "state": {
-      "type": "boolean",
+    "locale": {
+      "type": "string",
+      "required": true,
+      "default": "es"
+    },
+    "title": {
+      "type": "string",
       "required": true
+    },
+    "text": {
+      "type": "string"
     },
     "categoryId": {
       "type": "string",
@@ -18,14 +26,6 @@
   },
   "validations": [],
   "relations": {
-    "productVersions": {
-      "type": "hasMany",
-      "model": "ProductVersion",
-      "foreignKey": "productId",
-      "options": {
-        "nestRemoting": true
-      }
-    },
     "category": {
       "type": "belongsTo",
       "model": "Category",
