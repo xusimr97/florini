@@ -12,6 +12,9 @@
     "surnames": {
       "type": "string"
     },
+    "lang": {
+      "type": "string"
+    },
     "birthDate": {
       "type": "date"
     }
@@ -29,6 +32,14 @@
       "foreignKey": "userId",
       "options": {
         "disableInclude": true
+      }
+    },
+    "addresses": {
+      "type": "hasMany",
+      "model": "Address",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": true
       }
     }
   },

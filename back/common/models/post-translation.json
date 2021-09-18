@@ -1,54 +1,40 @@
 {
-  "name": "Post",
+  "name": "PostTranslation",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
-    "mysql": {
-      "table": "Post"
-    },
     "validateUpsert": true
   },
   "properties": {
-    "id": {
-      "type": "Number",
-      "id": true,
-      "description": "Identifier"
+    "locale": {
+      "type": "string",
+      "required": true,
+      "default": "es"
     },
-    "image": {
+    "title": {
       "type": "string",
       "required": true
     },
-    "type": {
+    "text": {
+      "type": "string",
+      "mysql": {
+        "dataType": "TEXT"
+      }
+    },
+    "postId": {
       "type": "string",
       "required": true
-    },
-    "url": {
-      "type": "string",
-      "required": true
-    },
-    "state": {
-      "type": "Boolean",
-      "default": 1
     }
   },
   "validations": [],
   "relations": {
-    "postTranslations": {
-      "type": "hasMany",
-      "model": "PostTranslation",
-      "foreignKey": "",
-      "options": {
-        "nestRemoting": true
-      }
+    "post": {
+      "type": "belongsTo",
+      "model": "Post",
+      "foreignKey": "postId"
     }
   },
   "acls": [
-    {
-      "accessType": "READ",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW"
-    },
     {
       "accessType": "*",
       "principalType": "ROLE",

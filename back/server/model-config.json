@@ -39,18 +39,6 @@
     "dataSource": "db",
     "public": false
   },
-  "Item": {
-    "dataSource": "db"
-  },
-  "ItemTag": {
-    "dataSource": "db"
-  },
-  "ItemType": {
-    "dataSource": "db"
-  },
-  "Tag": {
-    "dataSource": "db"
-  },
   "Buy": {
     "dataSource": "vn"
   },
@@ -76,7 +64,11 @@
     "dataSource": "db",
     "public": true
   },
-  "ItemCategory": {
+  "PostTranslation": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Address": {
     "dataSource": "db",
     "public": true
   }

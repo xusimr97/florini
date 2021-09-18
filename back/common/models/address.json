@@ -1,54 +1,53 @@
 {
-  "name": "Post",
+  "name": "Address",
+  "plural": "Addresses",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
-    "mysql": {
-      "table": "Post"
-    },
     "validateUpsert": true
   },
   "properties": {
-    "id": {
-      "type": "Number",
-      "id": true,
-      "description": "Identifier"
-    },
-    "image": {
+    "name": {
       "type": "string",
       "required": true
     },
-    "type": {
+    "address": {
       "type": "string",
       "required": true
     },
-    "url": {
+    "zipCode": {
+      "type": "number",
+      "required": true
+    },
+    "city": {
       "type": "string",
       "required": true
     },
-    "state": {
-      "type": "Boolean",
-      "default": 1
+    "province": {
+      "type": "string",
+      "required": true
+    },
+    "country": {
+      "type": "string",
+      "required": true
+    },
+    "customerId": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
   "relations": {
-    "postTranslations": {
-      "type": "hasMany",
-      "model": "PostTranslation",
-      "foreignKey": "",
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "customerId",
       "options": {
         "nestRemoting": true
       }
     }
   },
   "acls": [
-    {
-      "accessType": "READ",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW"
-    },
     {
       "accessType": "*",
       "principalType": "ROLE",
