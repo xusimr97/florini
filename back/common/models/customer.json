@@ -24,7 +24,10 @@
     "orders": {
       "type": "hasMany",
       "model": "Order",
-      "foreignKey": "customerId"
+      "foreignKey": "customerId",
+      "options": {
+        "nestRemoting": true
+      }
     },
     "accessTokens": {
       "type": "hasMany",
@@ -37,7 +40,7 @@
     "addresses": {
       "type": "hasMany",
       "model": "Address",
-      "foreignKey": "",
+      "foreignKey": "customerId",
       "options": {
         "nestRemoting": true
       }

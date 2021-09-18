@@ -71,5 +71,21 @@
   "Address": {
     "dataSource": "db",
     "public": true
+  },
+  "ShippingMethod": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ShippingMethodTranslation": {
+    "dataSource": "db",
+    "public": false
+  },
+  "PaymentMethod": {
+    "dataSource": "db",
+    "public": true
+  },
+  "PaymentMethodTranslation": {
+    "dataSource": "db",
+    "public": true
   }
 }

@@ -13,15 +13,102 @@
       "id": true,
       "description": "Identifier"
     },
-    "price": {
-      "type": "Number"
+    "billingAddress": {
+      "type": "string",
+      "required": true
+    },
+    "billingZipCode": {
+      "type": "number",
+      "required": true
+    },
+    "billingCity": {
+      "type": "string",
+      "required": true
+    },
+    "billingProvince": {
+      "type": "string",
+      "required": true
+    },
+    "billingCountry": {
+      "type": "string",
+      "required": true
+    },
+    "shippingAddress": {
+      "type": "string",
+      "required": true
+    },
+    "shippingZipCode": {
+      "type": "number",
+      "required": true
+    },
+    "shippingCity": {
+      "type": "string",
+      "required": true
+    },
+    "shippingProvince": {
+      "type": "string",
+      "required": true
+    },
+    "shippingCountry": {
+      "type": "string",
+      "required": true
     },
     "date": {
-      "type": "Date"
+      "type": "date",
+      "required": true
+    },
+    "paymentAmount": {
+      "type": "number",
+      "required": true
+    },
+    "customerId": {
+      "type": "string",
+      "required": true
+    },
+    "shippingMethodId": {
+      "type": "string",
+      "required": true
+    },
+    "paymentMethodId": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "customer": {
+      "type": "belongsTo",
+      "model": "Customer",
+      "foreignKey": "customerId",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "paymentMethod": {
+      "type": "belongsTo",
+      "model": "PaymentMethod",
+      "foreignKey": "paymentMethodId",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "shippingMethod": {
+      "type": "belongsTo",
+      "model": "ShippingMethod",
+      "foreignKey": "shippingMethodId",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "orderRows": {
+      "type": "hasMany",
+      "model": "OrderRow",
+      "foreignKey": "orderId",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
   "acls": [
     {
       "accessType": "*",

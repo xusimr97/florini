@@ -24,30 +24,29 @@
       "type": "Number",
       "required": true
     },
-    "itemName": {
-      "type": "String",
+    "state": {
+      "type": "Boolean",
       "required": true
     },
-    "itemDescription": {
-      "type": "String",
-      "required": true
-    },
-    "itemImage": {
-      "type": "String",
+    "deliveryDate": {
+      "type": "Date",
       "required": true
     }
   },
   "validations": [],
   "relations": {
-    "order": {
-      "type": "belongsTo",
-      "model": "Order",
-      "foreignKey": "orderId"
-    },
     "Buy": {
       "type": "belongsTo",
       "model": "Buy",
       "foreignKey": "buyId"
+    },
+    "order": {
+      "type": "belongsTo",
+      "model": "Order",
+      "foreignKey": "orderId",
+      "options": {
+        "nestRemoting": true
+      }
     }
   },
   "acls": [
