@@ -47,6 +47,14 @@
       "options": {
         "nestRemoting": true
       }
+    },
+    "productVersion": {
+      "type": "belongsTo",
+      "model": "ProductVersion",
+      "foreignKey": "productVersionId",
+      "options": {
+        "nestRemoting": true
+      }
     }
   },
   "acls": [

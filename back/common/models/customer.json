@@ -44,6 +44,14 @@
       "options": {
         "nestRemoting": true
       }
+    },
+    "ratings": {
+      "type": "hasMany",
+      "model": "Rating",
+      "foreignKey": "customerId",
+      "options": {
+        "nestRemoting": true
+      }
     }
   },
   "acls": [

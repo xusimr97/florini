@@ -87,5 +87,37 @@
   "PaymentMethodTranslation": {
     "dataSource": "db",
     "public": true
+  },
+  "Product": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ProductVersion": {
+    "dataSource": "db",
+    "public": true
+  },
+  "TagTranslation": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Tag": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ProductVersionTag": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Image": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ProductVersionTranslation": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Rating": {
+    "dataSource": "db",
+    "public": true
   }
 }

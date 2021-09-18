@@ -1,0 +1,43 @@
+{
+  "name": "ProductVersionTranslation",
+  "plural": "ProductVersionTranslations",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "productVersionId": {
+      "type": "string",
+      "required": true
+    },
+    "locale": {
+      "type": "string",
+      "required": true,
+      "default": "es"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "text": {
+      "type": "string"
+    },
+    "shortText": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "productVersion": {
+      "type": "belongsTo",
+      "model": "ProductVersion",
+      "foreignKey": "productVersionId",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
