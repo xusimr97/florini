@@ -1,0 +1,55 @@
+{
+  "name": "PaymentMethodTranslation",
+  "plural": "PaymentMethodTranslations",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "locale": {
+      "type": "string",
+      "required": true,
+      "default": "es"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "text": {
+      "type": "string",
+      "mysql": {
+        "dataType": "TEXT"
+      }
+    },
+    "paymentMethodId": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "paymentMethod": {
+      "type": "belongsTo",
+      "model": "PaymentMethod",
+      "foreignKey": "paymentMethodId",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}
