@@ -28,6 +28,22 @@
       "options": {
         "nestRemoting": true
       }
+    },
+    "childs": {
+      "type": "hasMany",
+      "model": "Category",
+      "foreignKey": "parentCategoryId",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "parentCategory": {
+      "type": "belongsTo",
+      "model": "Category",
+      "foreignKey": "parentCategoryId",
+      "options": {
+        "nestRemoting": true
+      }
     }
   },
   "acls": [

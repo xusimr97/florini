@@ -8,5 +8,7 @@
 	"passwordEmpty": "Password cannot be empty",
 	"passwordRequeriments": "Password doesn't meet requirements",
 	"notUniqueEmail": "User already exists",
-	"Authorization Required": "Authorization Required"
+	"Authorization Required": "Authorization Required",
+	"Email already exists": "Email already exists",
+	"Unknown \"Customer\" id \"7\".": "Unknown \"Customer\" id \"7\"."
 }
