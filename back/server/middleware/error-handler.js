@@ -12,15 +12,15 @@ module.exports = function () {
             let texts = messages[message]
             for (let i = 0; i < texts.length; i++) {
               if (!texts[i]) continue
-              texts[i] = i18.__n(texts[i])
+              texts[i] = i18n.__n(texts[i])
             }
           }
-          err.message = i18.__('invalidData')
+          err.message = i18n.__('invalidData')
           break
         }
       default:
         if (statusCode >= 400 && statusCode < 500) {
-          err.message = i18.__(err.message)
+          err.message = i18n.__(err.message)
         }
     }
 
