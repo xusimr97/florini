@@ -1,6 +1,6 @@
-# Florini
+# Flover
 
-Source code of Canini website.
+Source code of Flover website.
 
 ## Getting Started
 
@@ -25,3 +25,11 @@ $ quasar build --mode pwa
 * [Quasar](https://v1.quasar-framework.org/)
 * [nodejs](https://nodejs.org/)
 * [webpack](https://webpack.js.org/)
+
+## Add back/server/datasources.json
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  }
+}
