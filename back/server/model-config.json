@@ -127,5 +127,33 @@
   "CategoryTranslation": {
     "dataSource": "db",
     "public": true
+  },
+  "Payment": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Shipping": {
+    "dataSource": "db",
+    "public": true
+  },
+  "ShippingZone": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Region": {
+    "dataSource": "db",
+    "public": true
+  },
+  "RegionTranslation": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Country": {
+    "dataSource": "db",
+    "public": true
+  },
+  "CountryTranslation": {
+    "dataSource": "db",
+    "public": true
   }
 }

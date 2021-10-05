@@ -17,9 +17,9 @@
         "nestRemoting": true
       }
     },
-    "orders": {
+    "shippings": {
       "type": "hasMany",
-      "model": "Order",
+      "model": "Shipping",
       "foreignKey": "shippingMethodId",
       "options": {
         "nestRemoting": true

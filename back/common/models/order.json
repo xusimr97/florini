@@ -57,19 +57,7 @@
       "type": "date",
       "required": true
     },
-    "paymentAmount": {
-      "type": "number",
-      "required": true
-    },
     "customerId": {
-      "type": "string",
-      "required": true
-    },
-    "shippingMethodId": {
-      "type": "string",
-      "required": true
-    },
-    "paymentMethodId": {
       "type": "string",
       "required": true
     }
@@ -84,25 +72,25 @@
         "nestRemoting": true
       }
     },
-    "paymentMethod": {
-      "type": "belongsTo",
-      "model": "PaymentMethod",
-      "foreignKey": "paymentMethodId",
-      "options": {
-        "nestRemoting": true
-      }
-    },
-    "shippingMethod": {
-      "type": "belongsTo",
-      "model": "ShippingMethod",
-      "foreignKey": "shippingMethodId",
-      "options": {
-        "nestRemoting": true
-      }
-    },
     "orderRows": {
       "type": "hasMany",
       "model": "OrderRow",
+      "foreignKey": "orderId",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "payment": {
+      "type": "hasOne",
+      "model": "Payment",
+      "foreignKey": "orderId",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "shipping": {
+      "type": "hasOne",
+      "model": "Shipping",
       "foreignKey": "orderId",
       "options": {
         "nestRemoting": true

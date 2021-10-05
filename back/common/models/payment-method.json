@@ -17,9 +17,9 @@
         "nestRemoting": true
       }
     },
-    "orders": {
+    "payments": {
       "type": "hasMany",
-      "model": "Order",
+      "model": "Payment",
       "foreignKey": "paymentMethodId",
       "options": {
         "nestRemoting": true
