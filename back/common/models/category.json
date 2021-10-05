@@ -9,6 +9,11 @@
   "properties": {
     "parentCategoryId": {
       "type": "string"
+    },
+    "state": {
+      "type": "boolean",
+      "required": true,
+      "default": true
     }
   },
   "validations": [],

@@ -22,6 +22,12 @@
     },
     "productId": {
       "type": "string"
+    },
+    "sku": {
+      "type": "string"
+    },
+    "ean": {
+      "type": "string"
     }
   },
   "validations": [],
