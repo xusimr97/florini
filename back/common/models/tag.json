@@ -6,11 +6,7 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {
-    "code": {
-      "type": "string"
-    }
-  },
+  "properties": {},
   "validations": [],
   "relations": {
     "productVersions": {
@@ -21,6 +17,14 @@
         "nestRemoting": true
       },
       "through": "ProductVersionTag"
+    },
+    "tagTranslations": {
+      "type": "hasMany",
+      "model": "TagTranslation",
+      "foreignKey": "tagId",
+      "options": {
+        "nestRemoting": true
+      }
     }
   },
   "acls": [

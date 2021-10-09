@@ -15,10 +15,20 @@
     "title": {
       "type": "string",
       "required": true
+    },
+    "tagId": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "tag": {
+      "type": "belongsTo",
+      "model": "Tag",
+      "foreignKey": "tagId"
+    }
+  },
   "acls": [
     {
       "accessType": "*",
