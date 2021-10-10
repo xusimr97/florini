@@ -3,46 +3,50 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-'use strict';
+'use strict'
 
-var loopback = require('loopback');
-var boot = require('loopback-boot');
-var fs = require('fs');
-const i18n = require('i18n');
+var loopback = require('loopback')
+var bodyParser = require('body-parser')
+var multer = require('multer')
+var boot = require('loopback-boot')
+var fs = require('fs')
+const i18n = require('i18n')
 
-var app = module.exports = loopback();
+var app = (module.exports = loopback())
 
-app.start = function() {
+app.use(bodyParser.json()) // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(multer().any()) // for parsing multipart/form-data
+
+app.start = function () {
   i18n.configure({
     directory: `${__dirname}/../locales`
-  });
-  this.use(i18n.init);
+  })
+  this.use(i18n.init)
 
   // start the web server
-  return app.listen(function() {
-    app.emit('started');
-    var baseUrl = app.get('url').replace(/\/$/, '');
-    console.log('Web server listening at: %s', baseUrl);
+  return app.listen(function () {
+    app.emit('started')
+    var baseUrl = app.get('url').replace(/\/$/, '')
+    console.log('Web server listening at: %s', baseUrl)
     if (app.get('loopback-component-explorer')) {
-      var explorerPath = app.get('loopback-component-explorer').mountPath;
-      console.log('Browse your REST API at %s%s', baseUrl, explorerPath);
-      console.log('Started!');
+      var explorerPath = app.get('loopback-component-explorer').mountPath
+      console.log('Browse your REST API at %s%s', baseUrl, explorerPath)
+      console.log('Started!')
     }
-  });
-};
+  })
+}
 
-let options = {appRootDir: __dirname};
+let options = { appRootDir: __dirname }
 
-let dsRootDir = `/tmp/canini`;
-if (fs.existsSync(dsRootDir))
-  options.dsRootDir = dsRootDir;
+let dsRootDir = `/tmp/canini`
+if (fs.existsSync(dsRootDir)) options.dsRootDir = dsRootDir
 
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.
-boot(app, options, function(err) {
-  if (err) throw err;
+boot(app, options, function (err) {
+  if (err) throw err
 
   // start the server if `$ node server.js`
-  if (require.main === module)
-    app.start();
-});
+  if (require.main === module) app.start()
+})

@@ -13,5 +13,8 @@
 	"Unknown \"Customer\" id \"7\".": "Unknown \"Customer\" id \"7\".",
 	"accessToken is required to logout": "accessToken is required to logout",
 	"Unknown \"Category\" id \"5\".": "Unknown \"Category\" id \"5\".",
-	"Unknown \"Product\" id \"5\".": "Unknown \"Product\" id \"5\"."
+	"Unknown \"Product\" id \"5\".": "Unknown \"Product\" id \"5\".",
+	"Shared class \"Product\" has no method handling POST /customProduct%0A": "Shared class \"Product\" has no method handling POST /customProduct%0A",
+	"Shared class \"Product\" has no method handling POST /3/createProductVersion?access_token=FolynMo832rAzRPRusFgp0kuzBIVkzHKCEZnzJC3WLN63YlHqO2w1mDpY2NnjFxV": "Shared class \"Product\" has no method handling POST /3/createProductVersion?access_token=FolynMo832rAzRPRusFgp0kuzBIVkzHKCEZnzJC3WLN63YlHqO2w1mDpY2NnjFxV",
+	"Shared class \"Product\" has no method handling PATCH /3/createProductVersion": "Shared class \"Product\" has no method handling PATCH /3/createProductVersion"
 }

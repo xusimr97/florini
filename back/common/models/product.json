@@ -49,5 +49,33 @@
       "permission": "ALLOW"
     }
   ],
-  "methods": {}
+  "methods": {
+    "createProductVersion": {
+      "accepts": [
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
+        },
+        {
+          "arg": "res",
+          "type": "object",
+          "http": {
+            "source": "res"
+          }
+        },
+        { "arg": "id", "type": "string", "http": { "source": "path" } }
+      ],
+      "returns": [],
+      "description": "Create a Product Version and relations",
+      "http": {
+        "verb": "post",
+        "path": "/:id/createProductVersion"
+      },
+      "scopes": ["write"],
+      "documented": true
+    }
+  }
 }
