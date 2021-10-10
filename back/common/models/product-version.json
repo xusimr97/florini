@@ -50,12 +50,11 @@
     },
     "tags": {
       "type": "hasMany",
-      "model": "Tag",
+      "model": "ProductVersionTag",
       "foreignKey": "productVersionId",
       "options": {
         "nestRemoting": true
-      },
-      "through": "ProductVersionTag"
+      }
     },
     "images": {
       "type": "hasMany",

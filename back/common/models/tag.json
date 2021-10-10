@@ -9,14 +9,13 @@
   "properties": {},
   "validations": [],
   "relations": {
-    "productVersions": {
+    "productVersionTags": {
       "type": "hasMany",
-      "model": "ProductVersion",
+      "model": "ProductVersionTag",
       "foreignKey": "tagId",
       "options": {
         "nestRemoting": true
-      },
-      "through": "ProductVersionTag"
+      }
     },
     "tagTranslations": {
       "type": "hasMany",
