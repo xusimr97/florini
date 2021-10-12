@@ -134,7 +134,6 @@ module.exports = function (Product) {
 
         // Upsert Translations
         for (const productVersionTranslation of productVersionTranslations) {
-          // if()
           await ProductVersionTranslation.upsert({
             id: productVersionTranslation.id,
             productVersionId: productVersion.id,
@@ -144,29 +143,66 @@ module.exports = function (Product) {
             shortText: productVersionTranslation.shortText
           })
         }
-        return
-        // Create ProductVersionTag
+
+        // Remove ProductVersionTags
         const productVersionTags = body.tags
+        arrayids = []
+        productVersionTags.forEach(productVersionTag => {
+          if (productVersionTag.id) {
+            arrayids.push(productVersionTag.id)
+          }
+        })
+        let toRemoveProductVersionTags = await ProductVersionTag.find({
+          where: { id: { nin: arrayids } }
+        })
+        for (const toRemoveProductVersionTag of toRemoveProductVersionTags) {
+          await ProductVersionTag.deleteById(toRemoveProductVersionTag.id)
+        }
+
+        // Upsert ProductVersionTag
         for (const productVersionTag of productVersionTags) {
-          await ProductVersionTag.create({
+          await ProductVersionTag.upsert({
+            id: productVersionTag.id,
             productVersionId: productVersion.id,
             tagId: productVersionTag.tag,
             value: productVersionTag.value
           })
         }
 
+        // Remove Images
+        arrayids = body.images.map(image => {
+          return image.id
+        })
+        let toRemoveImages = await Image.find({
+          where: { id: { nin: arrayids } }
+        })
+
+        for (const toRemoveImage of toRemoveImages) {
+          fs.unlinkSync(`${__dirname}/../../client/${toRemoveImage.url}`)
+          await Image.deleteById(toRemoveImage.id)
+        }
+        //Edit Images
+
+        for (const reqImg of body.images) {
+          const image = await Image.findById(reqImg.id)
+
+          await image.patchAttributes({
+            order: reqImg.order
+          })
+        }
+
         // Create Images
         const images = req.files
         const date = moment().format('YYYY-MM-DD')
+        const dir =
+          __dirname +
+          `/../../client/products/${req.params.id}/${productVersion.id}`
+
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(dir, { recursive: true })
+        }
+
         for (const [index, image] of images.entries()) {
-          const dir =
-            __dirname +
-            `/../../client/products/${req.params.id}/${productVersion.id}`
-
-          if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir, { recursive: true })
-          }
-
           const url =
             `products/${req.params.id}/${productVersion.id}/${date}-` +
             makeid(7)
@@ -174,9 +210,9 @@ module.exports = function (Product) {
           await writeFile(__dirname + `/../../client/` + url, image.buffer)
 
           // Save url in Database
-          Image.create({
+          await Image.create({
             productVersionId: productVersion.id,
-            order: index,
+            order: Number.parseInt(image.fieldname),
             url
           })
         }
