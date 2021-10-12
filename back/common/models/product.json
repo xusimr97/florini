@@ -76,6 +76,34 @@
       },
       "scopes": ["write"],
       "documented": true
+    },
+    "editProductVersion": {
+      "accepts": [
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
+        },
+        {
+          "arg": "res",
+          "type": "object",
+          "http": {
+            "source": "res"
+          }
+        },
+        { "arg": "id", "type": "string", "http": { "source": "path" } },
+        { "arg": "versionId", "type": "string", "http": { "source": "path" } }
+      ],
+      "returns": [],
+      "description": "Edit a Product Version and relations",
+      "http": {
+        "verb": "post",
+        "path": "/:id/editProductVersion/:versionId"
+      },
+      "scopes": ["write"],
+      "documented": true
     }
   }
 }
