@@ -10,18 +10,14 @@
     "countryId": {
       "type": "string",
       "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],
   "relations": {
-    "regionTranslations": {
-      "type": "hasMany",
-      "model": "RegionTranslation",
-      "foreignKey": "regionId",
-      "options": {
-        "nestRemoting": true
-      }
-    },
     "shippingZones": {
       "type": "hasAndBelongsToMany",
       "model": "ShippingZone",

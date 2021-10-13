@@ -144,15 +144,7 @@
     "dataSource": "db",
     "public": true
   },
-  "RegionTranslation": {
-    "dataSource": "db",
-    "public": true
-  },
   "Country": {
-    "dataSource": "db",
-    "public": true
-  },
-  "CountryTranslation": {
     "dataSource": "db",
     "public": true
   }
