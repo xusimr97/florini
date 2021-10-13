@@ -14,6 +14,10 @@
     "price": {
       "type": "number",
       "required": true
+    },
+    "state": {
+      "type": "boolean",
+      "required": true
     }
   },
   "validations": [],
@@ -27,9 +31,9 @@
       }
     },
     "regions": {
-      "type": "hasAndBelongsToMany",
-      "model": "Region",
-      "foreignKey": "",
+      "type": "hasMany",
+      "model": "ShippingZoneRegion",
+      "foreignKey": "shippingZoneId",
       "options": {
         "nestRemoting": true
       }
@@ -49,5 +53,65 @@
       "permission": "ALLOW"
     }
   ],
-  "methods": {}
+  "methods": {
+    "createShippingZone": {
+      "accepts": [
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
+        },
+        {
+          "arg": "res",
+          "type": "object",
+          "http": {
+            "source": "res"
+          }
+        }
+      ],
+      "returns": [],
+      "description": "Create a ShippingZone and relations",
+      "http": {
+        "verb": "post",
+        "path": "/CustomCreate"
+      },
+      "scopes": ["write"],
+      "documented": true
+    },
+    "editShippingZone": {
+      "accepts": [
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
+        },
+        {
+          "arg": "res",
+          "type": "object",
+          "http": {
+            "source": "res"
+          }
+        },
+        {
+          "arg": "id",
+          "type": "string",
+          "http": {
+            "source": "path"
+          }
+        }
+      ],
+      "returns": [],
+      "description": "Edit a ShippingZone and relations",
+      "http": {
+        "verb": "post",
+        "path": "/CustomEdit/:id"
+      },
+      "scopes": ["write"],
+      "documented": true
+    }
+  }
 }

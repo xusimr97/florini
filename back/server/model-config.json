@@ -147,5 +147,9 @@
   "Country": {
     "dataSource": "db",
     "public": true
+  },
+  "ShippingZoneRegion": {
+    "dataSource": "db",
+    "public": true
   }
 }

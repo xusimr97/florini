@@ -81,6 +81,7 @@ module.exports = function (Product) {
       })
     } catch (error) {
       console.log(error)
+      res.status(400).send({ error: error.details })
     }
   }
 
@@ -124,7 +125,14 @@ module.exports = function (Product) {
           }
         })
         let toRemoveProductVersionTranslations = await ProductVersionTranslation.find(
-          { where: { id: { nin: arrayids } } }
+          {
+            where: {
+              and: [
+                { id: { nin: arrayids } },
+                { productVersionId: productVersion.id }
+              ]
+            }
+          }
         )
         for (const toRemoveProductVersionTranslation of toRemoveProductVersionTranslations) {
           await ProductVersionTranslation.deleteById(
@@ -153,7 +161,12 @@ module.exports = function (Product) {
           }
         })
         let toRemoveProductVersionTags = await ProductVersionTag.find({
-          where: { id: { nin: arrayids } }
+          where: {
+            and: [
+              { id: { nin: arrayids } },
+              { productVersionId: productVersion.id }
+            ]
+          }
         })
         for (const toRemoveProductVersionTag of toRemoveProductVersionTags) {
           await ProductVersionTag.deleteById(toRemoveProductVersionTag.id)
@@ -174,7 +187,12 @@ module.exports = function (Product) {
           return image.id
         })
         let toRemoveImages = await Image.find({
-          where: { id: { nin: arrayids } }
+          where: {
+            and: [
+              { id: { nin: arrayids } },
+              { productVersionId: productVersion.id }
+            ]
+          }
         })
 
         for (const toRemoveImage of toRemoveImages) {
@@ -219,6 +237,7 @@ module.exports = function (Product) {
       })
     } catch (error) {
       console.log(error)
+      res.status(400).send({ error: error.details })
     }
   }
 }
