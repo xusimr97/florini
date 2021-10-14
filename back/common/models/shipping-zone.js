@@ -28,7 +28,7 @@ module.exports = function (Shippingzone) {
       })
     } catch (error) {
       console.log(error)
-      res.status(400).send({ error: error.details })
+      res.status(400).send({ error: { message: error.message } })
     }
   }
 
@@ -47,7 +47,7 @@ module.exports = function (Shippingzone) {
         })
 
         // Update shippingZoneRegions
-        const shippingZoneRegions = body.regions
+        const shippingZoneRegions = req.body.regions
 
         // Remove shippingZoneRegions
         let arrayids = []
@@ -56,24 +56,30 @@ module.exports = function (Shippingzone) {
             arrayids.push(shippingZoneRegion.shippingZoneRegion)
           }
         })
-        // TODO
-        // let toRemoveShippingZoneRegion = await ShippingZoneRegion.find({
-        //   where: {
-        //     and: [
-        //       { id: { nin: arrayids } },
-        //       { shippingZoneId: shippingZone.id }
-        //     ]
-        //   }
-        // })
-        // for (const toRemoveProductVersionTranslation of toRemoveProductVersionTranslations) {
-        //   await ProductVersionTranslation.deleteById(
-        //     toRemoveProductVersionTranslation.id
-        //   )
-        // }
+        let toRemoveShippingZoneRegions = await ShippingZoneRegion.find({
+          where: {
+            and: [
+              { id: { nin: arrayids } },
+              { shippingZoneId: shippingZone.id }
+            ]
+          }
+        })
+        for (const toRemoveShippingZoneRegion of toRemoveShippingZoneRegions) {
+          await ShippingZoneRegion.deleteById(toRemoveShippingZoneRegion.id)
+        }
+
+        // Upsert ProductVersionTag
+        for (const shippingZoneRegion of shippingZoneRegions) {
+          await ShippingZoneRegion.upsert({
+            id: shippingZoneRegion.shippingZoneRegion,
+            shippingZoneId: shippingZone.id,
+            regionId: shippingZoneRegion.region
+          })
+        }
       })
     } catch (error) {
-      console.log(error)
-      res.status(400).send({ error: error.details })
+      console.log(error.message)
+      res.status(400).send({ error: { message: error.message } })
     }
   }
 }

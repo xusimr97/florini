@@ -81,7 +81,7 @@ module.exports = function (Product) {
       })
     } catch (error) {
       console.log(error)
-      res.status(400).send({ error: error.details })
+      res.status(400).send({ error: { message: error.message } })
     }
   }
 
@@ -237,7 +237,7 @@ module.exports = function (Product) {
       })
     } catch (error) {
       console.log(error)
-      res.status(400).send({ error: error.details })
+      res.status(400).send({ error: { message: error.message } })
     }
   }
 }
