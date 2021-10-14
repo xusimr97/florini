@@ -17,6 +17,10 @@
     },
     "birthDate": {
       "type": "date"
+    },
+    "state": {
+      "type": "boolean",
+      "default": true
     }
   },
   "validations": [],
@@ -66,7 +70,46 @@
       "principalType": "ROLE",
       "principalId": "admin",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "CustomLogin"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY",
+      "property": "login"
     }
   ],
-  "methods": {}
+  "methods": {
+    "CustomLogin": {
+      "accepts": [
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
+        },
+        {
+          "arg": "res",
+          "type": "object",
+          "http": {
+            "source": "res"
+          }
+        }
+      ],
+      "returns": [],
+      "description": "Login",
+      "http": {
+        "verb": "post",
+        "path": "/CustomLogin"
+      },
+      "documented": true
+    }
+  }
 }
