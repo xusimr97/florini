@@ -6,7 +6,13 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "state": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    }
+  },
   "validations": [],
   "relations": {
     "shippingMethodTranslations": {

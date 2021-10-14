@@ -11,23 +11,31 @@
       "type": "string",
       "required": true
     },
-    "address": {
+    "street": {
       "type": "string",
+      "required": true
+    },
+    "number": {
+      "type": "number",
       "required": true
     },
     "zipCode": {
       "type": "number",
       "required": true
     },
+    "additionalInformation": {
+      "type": "string",
+      "required": true
+    },
     "city": {
       "type": "string",
       "required": true
     },
-    "province": {
+    "regionId": {
       "type": "string",
       "required": true
     },
-    "country": {
+    "countryId": {
       "type": "string",
       "required": true
     },
@@ -38,6 +46,22 @@
   },
   "validations": [],
   "relations": {
+    "region": {
+      "type": "belongsTo",
+      "model": "Region",
+      "foreignKey": "regionId",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "country": {
+      "type": "belongsTo",
+      "model": "Country",
+      "foreignKey": "countryId",
+      "options": {
+        "nestRemoting": true
+      }
+    },
     "customer": {
       "type": "belongsTo",
       "model": "Customer",

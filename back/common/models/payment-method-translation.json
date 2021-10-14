@@ -16,12 +16,6 @@
       "type": "string",
       "required": true
     },
-    "text": {
-      "type": "string",
-      "mysql": {
-        "dataType": "TEXT"
-      }
-    },
     "paymentMethodId": {
       "type": "string"
     }

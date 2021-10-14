@@ -15,12 +15,6 @@
       "type": "string",
       "required": true
     },
-    "text": {
-      "type": "string",
-      "mysql": {
-        "dataType": "TEXT"
-      }
-    },
     "shippingMethodId": {
       "type": "string"
     }
