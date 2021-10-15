@@ -24,10 +24,10 @@ if (!downloadFiles.length) {
 }
 
 const gcs = require('@google-cloud/storage');
-const bucketName = 'datasources.canini.es';
+const bucketName = 'datasources.flover.es';
 const storage = new gcs.Storage();
 
-const confDir = '/tmp/canini';
+const confDir = '/tmp/flover';
 fs.mkdirSync(confDir);
 
 const tasks = [];

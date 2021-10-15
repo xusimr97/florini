@@ -4,7 +4,7 @@
       <router-link to="/">
         <img
           src="statics/logo.svg"
-          alt="Canini"
+          alt="Flover"
           class="block"
         />
       </router-link>

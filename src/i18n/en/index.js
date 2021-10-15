@@ -58,7 +58,7 @@ export default {
   // Home
   startOrder: 'Start order',
   recommendedByPets: 'Recommended by 9 out of 10 canines!',
-  joinParty: '¡Join the Canini party!',
+  joinParty: '¡Join the Flover party!',
   tooManyOffers: 'So many offers that you do not know where to look!',
   receiveWithKit:
     'Receive messages and personalized texts with your monthly kit!',
@@ -82,5 +82,5 @@ export default {
     'The order will arrive to your home in 24/48 hours depending on which area you are.',
 
   // About
-  aboutDesc: 'Canini Mascots offers all services for your pets.'
+  aboutDesc: 'Flover Mascots offers all services for your pets.'
 }

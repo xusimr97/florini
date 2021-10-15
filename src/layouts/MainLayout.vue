@@ -74,7 +74,7 @@
     </q-header>
     <q-drawer v-model="leftDrawerOpen" behavior="mobile" elevated>
       <div class="q-pa-md shadow-1 q-mb-md bg-primary" style="color: white;">
-        <img src="statics/logo.svg" alt="Canini" class="logo q-my-md q-mx-md" />
+        <img src="statics/logo.svg" alt="Flover" class="logo q-my-md q-mx-md" />
         <div class="text-subtitle1">
           <div
             v-if="$store.state.customer.email"

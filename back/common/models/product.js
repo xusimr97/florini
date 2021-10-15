@@ -94,7 +94,8 @@ module.exports = function (Product) {
           ProductVersion,
           ProductVersionTranslation,
           ProductVersionTag,
-          Image
+          Image,
+          Rating
         } = models
         const body = customBodyParse(req.body)
         console.log(body)
@@ -232,6 +233,18 @@ module.exports = function (Product) {
             productVersionId: productVersion.id,
             order: Number.parseInt(image.fieldname),
             url
+          })
+        }
+
+        // Update Ratings
+        for (const rating of body.ratings) {
+          await Rating.upsert({
+            id: rating.id,
+            state: rating.state,
+            date: rating.date,
+            title: rating.title,
+            text: rating.text,
+            value: rating.value
           })
         }
       })

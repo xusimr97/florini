@@ -32,7 +32,7 @@ RUN npm run build
 
 FROM node
 
-WORKDIR /canini
+WORKDIR /flover
 ENV NODE_ENV production
 
 COPY back/package.json back/package-lock.json ./

@@ -103,8 +103,8 @@ module.exports = function (ctx) {
       // workboxPluginMode: 'InjectManifest',
       // workboxOptions: {},
       manifest: {
-        name: 'Canini',
-        short_name: 'Canini',
+        name: 'Flover',
+        short_name: 'Flover',
         // description: 'Best PWA App in town!',
         display: 'standalone',
         orientation: 'portrait',

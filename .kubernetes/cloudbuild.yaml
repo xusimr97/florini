@@ -4,17 +4,17 @@ steps:
   args:
   - '-c'
   - |
-    docker pull gcr.io/$PROJECT_ID/canini:latest || exit 0
+    docker pull gcr.io/$PROJECT_ID/flover:latest || exit 0
 - name: 'gcr.io/cloud-builders/docker'
   args: [
     'build',
-    '-t', 'gcr.io/$PROJECT_ID/canini:$SHORT_SHA',
-    '-t', 'gcr.io/$PROJECT_ID/canini:latest',
-    '--cache-from', 'gcr.io/$PROJECT_ID/canini:latest',
+    '-t', 'gcr.io/$PROJECT_ID/flover:$SHORT_SHA',
+    '-t', 'gcr.io/$PROJECT_ID/flover:latest',
+    '--cache-from', 'gcr.io/$PROJECT_ID/flover:latest',
     '.'
   ]
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/$PROJECT_ID/canini']
+  args: ['push', 'gcr.io/$PROJECT_ID/flover']
 - name: 'gcr.io/cloud-builders/gke-deploy:stable'
   env:
     - 'SHORT_SHA=$SHORT_SHA'
@@ -24,4 +24,4 @@ steps:
   - --location=europe-west1-b
   - --cluster=cluster
   - --filename=kubeconfig.yaml
-  - --image=gcr.io/$PROJECT_ID/canini:$SHORT_SHA
+  - --image=gcr.io/$PROJECT_ID/flover:$SHORT_SHA

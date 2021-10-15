@@ -39,7 +39,7 @@ app.start = function () {
 
 let options = { appRootDir: __dirname }
 
-let dsRootDir = `/tmp/canini`
+let dsRootDir = `/tmp/flover`
 if (fs.existsSync(dsRootDir)) options.dsRootDir = dsRootDir
 
 // Bootstrap the application, configure models, datasources and middleware.

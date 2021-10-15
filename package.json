@@ -1,8 +1,8 @@
 {
-  "name": "canini",
+  "name": "flover",
   "version": "0.0.1",
-  "description": "Canini web page",
-  "productName": "Canini",
+  "description": "Flover web page",
+  "productName": "Flover",
   "cordovaId": "org.cordova.quasar.app",
   "author": "juan.ferrer.toribio@gmail.com",
   "private": true,

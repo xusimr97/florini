@@ -5,7 +5,6 @@ module.exports = function (Self) {
     try {
       await app.dataSources.db.transaction(async models => {
         const { Customer } = models
-        console.log(req.body)
         const token = await Customer.login({
           email: req.body.email,
           password: req.body.password
@@ -30,7 +29,6 @@ module.exports = function (Self) {
     try {
       await app.dataSources.db.transaction(async models => {
         const { Customer, Address } = models
-        console.log(req.body)
         const customer = await Customer.findById(req.params.id)
         await customer.updateAttributes({
           state: req.body.state,

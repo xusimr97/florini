@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-card-section class="q-mb-md">
-      <img src="statics/logo.svg" alt="Canini" />
+      <img src="statics/logo.svg" alt="Flover" />
     </q-card-section>
     <q-card-section>
       <q-item-label id="dontWorry">
