@@ -26,6 +26,63 @@ module.exports = function (Self) {
     }
   }
 
+  Self.CustomEdit = async function (req, res) {
+    try {
+      await app.dataSources.db.transaction(async models => {
+        const { Customer, Address } = models
+        console.log(req.body)
+        const customer = await Customer.findById(req.params.id)
+        await customer.updateAttributes({
+          state: req.body.state,
+          name: req.body.name,
+          surnames: req.body.surnames,
+          email: req.body.email,
+          birthDate: req.body.birthDate
+        })
+
+        // Update addresses
+        const addresses = req.body.addresses
+
+        // Remove addresses
+        let arrayids = []
+        addresses.forEach(address => {
+          if (address.id) {
+            arrayids.push(address.id)
+          }
+        })
+        let toRemoveAddresses = await Address.find({
+          where: {
+            and: [{ id: { nin: arrayids } }, { customerId: customer.id }]
+          }
+        })
+        for (const toRemoveAddress of toRemoveAddresses) {
+          await Address.deleteById(toRemoveAddress.id)
+        }
+
+        // Upsert addresses
+        for (const address of addresses) {
+          await Address.upsert({
+            id: address.id,
+            name: address.name,
+            customerId: customer.id,
+            countryId: address.countryId,
+            regionId: address.regionId,
+            zipCode: address.zipCode,
+            city: address.city,
+            street: address.street,
+            number: address.number,
+            additionalInformation: address.additionalInformation
+          })
+        }
+      })
+    } catch (error) {
+      console.log(error)
+      res
+        .status(400)
+        .send({ error: { message: error.message, code: error.code } })
+    }
+  }
+
   Self.validatesUniquenessOf('email', {
     message: 'notUniqueEmail'
   })

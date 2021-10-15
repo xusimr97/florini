@@ -68,7 +68,7 @@ module.exports = function (Shippingzone) {
           await ShippingZoneRegion.deleteById(toRemoveShippingZoneRegion.id)
         }
 
-        // Upsert ProductVersionTag
+        // Upsert shippingZoneRegion
         for (const shippingZoneRegion of shippingZoneRegions) {
           await ShippingZoneRegion.upsert({
             id: shippingZoneRegion.shippingZoneRegion,

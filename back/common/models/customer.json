@@ -110,6 +110,39 @@
         "path": "/CustomLogin"
       },
       "documented": true
+    },
+    "CustomEdit": {
+      "accepts": [
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
+        },
+        {
+          "arg": "res",
+          "type": "object",
+          "http": {
+            "source": "res"
+          }
+        },
+        {
+          "arg": "id",
+          "type": "string",
+          "http": {
+            "source": "path"
+          }
+        }
+      ],
+      "returns": [],
+      "description": "Edit a Customer and Addresses",
+      "http": {
+        "verb": "patch",
+        "path": "/CustomEdit/:id"
+      },
+      "scopes": ["write"],
+      "documented": true
     }
   }
 }

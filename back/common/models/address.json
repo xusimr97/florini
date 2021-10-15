@@ -16,16 +16,14 @@
       "required": true
     },
     "number": {
-      "type": "number",
-      "required": true
+      "type": "number"
     },
     "zipCode": {
       "type": "number",
       "required": true
     },
     "additionalInformation": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "city": {
       "type": "string",
