@@ -3,17 +3,9 @@
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
-    "mysql": {
-      "table": "Post"
-    },
     "validateUpsert": true
   },
   "properties": {
-    "id": {
-      "type": "Number",
-      "id": true,
-      "description": "Identifier"
-    },
     "image": {
       "type": "string",
       "required": true
@@ -62,5 +54,65 @@
       "permission": "ALLOW"
     }
   ],
-  "methods": {}
+  "methods": {
+    "createPost": {
+      "accepts": [
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
+        },
+        {
+          "arg": "res",
+          "type": "object",
+          "http": {
+            "source": "res"
+          }
+        }
+      ],
+      "returns": [],
+      "description": "Create a Post",
+      "http": {
+        "verb": "post",
+        "path": "/CustomCreate"
+      },
+      "scopes": ["write"],
+      "documented": true
+    },
+    "editPost": {
+      "accepts": [
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
+        },
+        {
+          "arg": "res",
+          "type": "object",
+          "http": {
+            "source": "res"
+          }
+        },
+        {
+          "arg": "id",
+          "type": "string",
+          "http": {
+            "source": "path"
+          }
+        }
+      ],
+      "returns": [],
+      "description": "Edit a Post",
+      "http": {
+        "verb": "post",
+        "path": "/CustomEdit/:id"
+      },
+      "scopes": ["write"],
+      "documented": true
+    }
+  }
 }

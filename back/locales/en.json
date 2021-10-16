@@ -20,5 +20,6 @@
 	"The query object exceeds maximum depth 12": "The query object exceeds maximum depth 12",
 	"Unknown \"Customer\" id \"5\".": "Unknown \"Customer\" id \"5\".",
 	"Unknown \"Tag\" id \"1\".": "Unknown \"Tag\" id \"1\".",
-	"Shared class \"ShippingMethod\" has no method handling POST /1": "Shared class \"ShippingMethod\" has no method handling POST /1"
+	"Shared class \"ShippingMethod\" has no method handling POST /1": "Shared class \"ShippingMethod\" has no method handling POST /1",
+	"Shared class \"Post\" has no method handling POST /CustomEdit/1": "Shared class \"Post\" has no method handling POST /CustomEdit/1"
 }
