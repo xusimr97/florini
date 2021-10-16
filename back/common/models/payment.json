@@ -22,6 +22,26 @@
     "amount": {
       "type": "number",
       "required": true
+    },
+    "billingAddress": {
+      "type": "string",
+      "required": true
+    },
+    "billingZipCode": {
+      "type": "number",
+      "required": true
+    },
+    "billingCity": {
+      "type": "string",
+      "required": true
+    },
+    "billingProvince": {
+      "type": "string",
+      "required": true
+    },
+    "billingCountry": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],

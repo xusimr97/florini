@@ -22,6 +22,26 @@
     "shippingZoneId": {
       "type": "string",
       "required": true
+    },
+    "shippingAddress": {
+      "type": "string",
+      "required": true
+    },
+    "shippingZipCode": {
+      "type": "number",
+      "required": true
+    },
+    "shippingCity": {
+      "type": "string",
+      "required": true
+    },
+    "shippingProvince": {
+      "type": "string",
+      "required": true
+    },
+    "shippingCountry": {
+      "type": "string",
+      "required": true
     }
   },
   "validations": [],

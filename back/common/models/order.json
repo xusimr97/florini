@@ -13,46 +13,6 @@
       "id": true,
       "description": "Identifier"
     },
-    "billingAddress": {
-      "type": "string",
-      "required": true
-    },
-    "billingZipCode": {
-      "type": "number",
-      "required": true
-    },
-    "billingCity": {
-      "type": "string",
-      "required": true
-    },
-    "billingProvince": {
-      "type": "string",
-      "required": true
-    },
-    "billingCountry": {
-      "type": "string",
-      "required": true
-    },
-    "shippingAddress": {
-      "type": "string",
-      "required": true
-    },
-    "shippingZipCode": {
-      "type": "number",
-      "required": true
-    },
-    "shippingCity": {
-      "type": "string",
-      "required": true
-    },
-    "shippingProvince": {
-      "type": "string",
-      "required": true
-    },
-    "shippingCountry": {
-      "type": "string",
-      "required": true
-    },
     "date": {
       "type": "date",
       "required": true
