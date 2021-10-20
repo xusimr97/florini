@@ -16,20 +16,16 @@
       "type": "Number",
       "required": true
     },
+    "productVersionId": {
+      "type": "Number",
+      "required": true
+    },
     "buyId": {
       "type": "Number",
       "required": true
     },
-    "quantity": {
+    "amount": {
       "type": "Number",
-      "required": true
-    },
-    "state": {
-      "type": "Boolean",
-      "required": true
-    },
-    "deliveryDate": {
-      "type": "Date",
       "required": true
     }
   },

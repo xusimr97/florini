@@ -7,7 +7,7 @@
     "validateUpsert": true
   },
   "properties": {
-    "date": {
+    "paymentDate": {
       "type": "date",
       "required": true
     },
@@ -23,24 +23,34 @@
       "type": "number",
       "required": true
     },
-    "billingAddress": {
+    "street": {
       "type": "string",
       "required": true
     },
-    "billingZipCode": {
+    "number": {
+      "type": "number"
+    },
+    "zipCode": {
       "type": "number",
       "required": true
     },
-    "billingCity": {
+    "additionalInformation": {
+      "type": "string"
+    },
+    "city": {
       "type": "string",
       "required": true
     },
-    "billingProvince": {
+    "regionId": {
       "type": "string",
       "required": true
     },
-    "billingCountry": {
+    "countryId": {
       "type": "string",
+      "required": true
+    },
+    "state": {
+      "type": "Boolean",
       "required": true
     }
   },

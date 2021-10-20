@@ -11,7 +11,7 @@
       "type": "string",
       "required": true
     },
-    "date": {
+    "deliveryDate": {
       "type": "date",
       "required": true
     },
@@ -23,24 +23,34 @@
       "type": "string",
       "required": true
     },
-    "shippingAddress": {
+    "street": {
       "type": "string",
       "required": true
     },
-    "shippingZipCode": {
+    "number": {
+      "type": "number"
+    },
+    "zipCode": {
       "type": "number",
       "required": true
     },
-    "shippingCity": {
+    "additionalInformation": {
+      "type": "string"
+    },
+    "city": {
       "type": "string",
       "required": true
     },
-    "shippingProvince": {
+    "regionId": {
       "type": "string",
       "required": true
     },
-    "shippingCountry": {
+    "countryId": {
       "type": "string",
+      "required": true
+    },
+    "state": {
+      "type": "Boolean",
       "required": true
     }
   },

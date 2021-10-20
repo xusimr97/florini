@@ -13,12 +13,16 @@
       "id": true,
       "description": "Identifier"
     },
-    "date": {
+    "createdDate": {
       "type": "date",
       "required": true
     },
     "customerId": {
       "type": "string",
+      "required": true
+    },
+    "state": {
+      "type": "Boolean",
       "required": true
     }
   },
