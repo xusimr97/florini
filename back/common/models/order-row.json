@@ -1,17 +1,15 @@
 {
   "name": "OrderRow",
+  "plural": "OrderRows",
   "base": "PersistedModel",
+  "idInjection": true,
   "options": {
     "mysql": {
       "table": "OrderRow"
-    }
+    },
+    "validateUpsert": true
   },
   "properties": {
-    "id": {
-      "type": "Number",
-      "id": true,
-      "description": "Identifier"
-    },
     "orderId": {
       "type": "Number",
       "required": true
@@ -21,8 +19,7 @@
       "required": true
     },
     "buyId": {
-      "type": "Number",
-      "required": true
+      "type": "Number"
     },
     "amount": {
       "type": "Number",

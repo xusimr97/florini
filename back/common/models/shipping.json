@@ -50,12 +50,20 @@
       "required": true
     },
     "state": {
-      "type": "Boolean",
+      "type": "number",
       "required": true
     }
   },
   "validations": [],
   "relations": {
+    "country": {
+      "type": "belongsTo",
+      "model": "Country",
+      "foreignKey": "countryId",
+      "options": {
+        "nestRemoting": true
+      }
+    },
     "shippingMethod": {
       "type": "belongsTo",
       "model": "ShippingMethod",

@@ -1,18 +1,15 @@
 {
   "name": "Order",
+  "plural": "Orders",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "mysql": {
       "table": "Order"
-    }
+    },
+    "validateUpsert": true
   },
   "properties": {
-    "id": {
-      "type": "Number",
-      "id": true,
-      "description": "Identifier"
-    },
     "createdDate": {
       "type": "date",
       "required": true
@@ -75,5 +72,65 @@
       "permission": "ALLOW"
     }
   ],
-  "methods": {}
+  "methods": {
+    "createOrder": {
+      "accepts": [
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
+        },
+        {
+          "arg": "res",
+          "type": "object",
+          "http": {
+            "source": "res"
+          }
+        }
+      ],
+      "returns": [],
+      "description": "Create an Order and relations",
+      "http": {
+        "verb": "post",
+        "path": "/CustomCreate"
+      },
+      "scopes": ["write"],
+      "documented": true
+    },
+    "editOrder": {
+      "accepts": [
+        {
+          "arg": "req",
+          "type": "object",
+          "http": {
+            "source": "req"
+          }
+        },
+        {
+          "arg": "res",
+          "type": "object",
+          "http": {
+            "source": "res"
+          }
+        },
+        {
+          "arg": "id",
+          "type": "string",
+          "http": {
+            "source": "path"
+          }
+        }
+      ],
+      "returns": [],
+      "description": "Edit an Order and relations",
+      "http": {
+        "verb": "post",
+        "path": "/CustomEdit/:id"
+      },
+      "scopes": ["write"],
+      "documented": true
+    }
+  }
 }
