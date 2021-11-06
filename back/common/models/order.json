@@ -19,7 +19,7 @@
       "required": true
     },
     "state": {
-      "type": "Boolean",
+      "type": "number",
       "required": true
     }
   },
