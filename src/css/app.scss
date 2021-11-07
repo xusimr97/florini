@@ -6,9 +6,11 @@ a {
   }
 }
 .link {
-  color: #44629e;
+  color: var(--q-primary);
+  text-decoration: underline;
   &:active {
-    color: #44629e;
+    color: var(--q-primary);
+    text-decoration: underline;
   }
 }
 .slide-left-leave-active,
@@ -80,4 +82,26 @@ a {
   @media (max-width: 599px) {
     padding: 16px 0px;
   }
+}
+
+// Colors
+.img-white {
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(109%)
+    contrast(102%);
+}
+
+// Buttons
+.flover-btn {
+  padding: 10px;
+  border-radius: 7px;
+  width: 100%;
+}
+
+// Inputs
+.q-field--outlined .q-field__control {
+  border-radius: 7px;
+}
+
+hr {
+  color: #c2c2c2;
 }

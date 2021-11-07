@@ -10,6 +10,10 @@ export default defineComponent({
     const iconPath = "img:app-icons/";
     const myIcons = {
       "app:flower": "flower.svg",
+      "app:cart": "cart.svg",
+      "app:google": "google.svg",
+      "app:icon": "icon.svg",
+      "app:icon-white": "icon-white.svg",
     };
     this.$q.iconMapFn = (iconName) => {
       const icon = myIcons[iconName];

@@ -1,17 +1,17 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <q-toolbar class="bg-secondary">
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
+      <q-toolbar class="bg-secondary row justify-between items-center">
+        <q-btn flat round @click="leftDrawerOpen = !leftDrawerOpen">
+          <q-icon name="menu" class="header-icon-2"></q-icon>
+        </q-btn>
 
-        <q-toolbar-title> {{ $t($route.name) }} </q-toolbar-title>
+        <q-btn flat round :to="{ name: 'home' }">
+          <q-icon name="app:icon-white" class="header-icon"></q-icon>
+        </q-btn>
+        <q-btn flat round>
+          <q-icon name="app:cart" class="header-icon-2 img-white"></q-icon>
+        </q-btn>
       </q-toolbar>
     </q-header>
 
@@ -90,7 +90,7 @@ export default defineComponent({
     },
     async logout() {
       await this.$axios.post("Customers/logout");
-      await this.$router.push("/login");
+      await this.$router.push("/auth/login");
     },
   },
 });
@@ -100,5 +100,12 @@ export default defineComponent({
   .image-primary-filter {
     filter: $primary-filter;
   }
+}
+
+.header-icon {
+  font-size: 40px;
+}
+.header-icon-2 {
+  font-size: 24px;
 }
 </style>

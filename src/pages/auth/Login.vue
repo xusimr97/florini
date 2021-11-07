@@ -1,27 +1,47 @@
 <template>
-  <div class="form">
-    <q-card-section>
+  <div class="container form">
+    <!-- <q-card-section>
       <router-link to="/">
         <div class="row justify-center items-center">
           <img src="logo.svg" alt="Canini" class="logo-img" />
         </div>
       </router-link>
-    </q-card-section>
+    </q-card-section> -->
     <q-card-section>
-      <q-form @submit="onLogin" class="q-gutter-y-md">
-        <div class="q-gutter-y-sm">
+      <div class="text-h5 q-mb-sm text-weight-bold">
+        {{ $t("login") }}
+      </div>
+      <div class="text-body1 q-mb-md">
+        {{ $t("noAccountYet") }}
+        <router-link :to="{ name: 'login' }" class="link">
+          {{ $t("createAccount") }}
+        </router-link>
+      </div>
+      <q-btn outline class="flover-social-btn q-mb-md">
+        <q-icon name="app:google" style="font-size: 30px"></q-icon>
+      </q-btn>
+      <q-btn outline class="flover-social-btn">
+        <q-icon
+          name="fab fa-facebook"
+          style="color: #1278f3; font-size: 30px"
+        ></q-icon>
+      </q-btn>
+
+      <hr class="q-my-md" />
+      <q-form @submit="onLogin">
+        <div>
           <q-input
             v-model="email"
             :label="$t('email')"
             :rules="[(val) => !!val || $t('inputEmail')]"
-            filled
+            outlined
           />
           <q-input
             v-model="password"
             :label="$t('password')"
             :type="showPwd ? 'password' : 'text'"
             :rules="[(val) => !!val || $t('inputPassword')]"
-            filled
+            outlined
           >
             <template #append>
               <q-icon
@@ -36,10 +56,14 @@
           <q-btn
             type="submit"
             :label="$t('enter')"
-            class="full-width"
-            color="black"
-            rounded
+            class="flover-btn"
+            color="primary"
           />
+        </div>
+        <div class="text-body2 q-mb-md">
+          <router-link :to="{ name: 'login' }" class="link">
+            {{ $t("notRememberPassword") }}
+          </router-link>
         </div>
       </q-form>
     </q-card-section>
@@ -95,5 +119,12 @@ export default {
 
 .logo-img {
   width: 90%;
+}
+
+.flover-social-btn {
+  height: 56px;
+  width: 100%;
+  border-radius: 7px;
+  color: #c2c2c2;
 }
 </style>

@@ -29,13 +29,16 @@ export default {
   customersForm: 'Formulario Usuarios',
 
   // Login
+  login: 'Iniciar sesión',
   enter: 'Entrar',
   email: 'Correo electrónico',
   password: 'Contraseña',
   remember: 'Recordarme',
-  notRememberPassword: 'No recuerdo mi contraseña',
+  notRememberPassword: '¿Has olvidado tu contraseña?',
   inputEmail: 'Introduce el correo',
   inputPassword: 'Introduce la contraseña',
+  noAccountYet: '¿Aún no eres Flover?',
+  createAccount: 'Crea tu cuenta',
 
   // Customers
   customers: 'Usuarios',
@@ -154,9 +157,9 @@ export default {
   postCreatedSuccessfully: 'Publicación creada con éxito',
 
   //Orders
-  orders:'Pedidos',
-  ordersForm:'Formulario Pedidos',
-  order:'Pedido',
+  orders: 'Pedidos',
+  ordersForm: 'Formulario Pedidos',
+  order: 'Pedido',
   customer: 'Cliente',
   amount: 'Cantidad',
   buyId: 'Id de compra externa',

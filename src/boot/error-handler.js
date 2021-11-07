@@ -26,10 +26,10 @@ export default boot(({ app }) => {
       const status = res.status
 
       if (status === 403) {
-        vm.$router.push('/login')
+        vm.$router.push('/auth/login')
       }
       if (status === 401) {
-        vm.$router.push('/login')
+        vm.$router.push('/auth/login')
       }
 
       if (status >= 400 && status < 500) {

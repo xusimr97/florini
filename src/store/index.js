@@ -6,7 +6,7 @@ import VuexPersistence from 'vuex-persist'
 
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
-  key: 'canini_app'
+  key: 'flover-app'
 })
 
 /*
