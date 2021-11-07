@@ -1,6 +1,32 @@
+// This is just an example,
+// so you can safely delete all default props below
+
 export default {
   somethingWentWrong: 'Algo salió mal',
   internalServerError: 'Error interno del servidor',
+
+  // General
+  send: 'Enviar',
+  LOGIN_FAILED:
+    'El inicio de sesión ha fallado, comprueba el correo y la contraseña.',
+  MODEL_NOT_FOUND: 'No hemos encontrado ningún resultado',
+  AUTHORIZATION_REQUIRED: 'Se necesita autorización',
+  loginSuccessfully: 'Has iniciado sesión con éxito',
+  areYouSure: '¿Estás seguro?',
+  WouldYouLikeToDelete:
+    '¿Quieres eliminar este elemento? Esta acción es irrebocable y no se puede volver a atrás',
+  deletingObject: 'Eliminando el objeto',
+  logout: 'Cerrar Sesión',
+  show: 'Ver',
+  edit: 'Editar',
+  delete: 'Eliminar',
+  pending: 'Pendiente',
+  completed: 'Completado',
+  canceled: 'Cancelado',
+
+  // Home
+  home: 'Inicio',
+  customersForm: 'Formulario Usuarios',
 
   // Login
   enter: 'Entrar',
@@ -11,73 +37,141 @@ export default {
   inputEmail: 'Introduce el correo',
   inputPassword: 'Introduce la contraseña',
 
-  // Erro404
-  whereYouGoingCowboy: '¿Dónde vas vaquero?',
-  goBack: 'Volver',
-
-  // Layout
-  login: 'Iniciar sesión',
-  visitor: 'Visitante',
-  logout: 'Cerrar sesión',
-  noResults: 'No hay resultados',
-
-
-  // Menu
-  home: 'Inicio',
-  catalog: 'Catálogo',
-  conditions: 'Condiciones',
-  about: 'Sobre nosotros',
-  register: 'Registrarse',
-
-  // AccountMenu
-  configuration: 'Configuración',
-  orders: 'Pedidos',
-  suscriptions: 'Suscripciones',
-  myMascots: 'Mis mascotas',
-  coininis: 'Coininis',
-
-  // Home
-  startOrder: 'Empezar pedido',
-  recommendedByPets: '¡Recomendado por 9 de cada 10 caninos!',
-  joinParty: '¡Únete a la fiesta Flover!',
-  tooManyOffers: '¡Tantas ofertas que no sabes dónde mirar!',
-  receiveWithKit: '¡Recibe con tu kit mensual mensajes y textos personalizados!',
-  concentrationGames: 'Juegos de concentración desde 3,90€',
-  veggieMeat: 'Comida vegana para tu mascota',
-
-  // Catalog
-  more: 'Más',
-  buy: 'Comprar',
-  categories: 'Categorias',
-
-  // Orders
-  orderNumber: 'Número del pedido',
-  viewDetails: 'Ver detalles',
-  of: 'de',
-  orderPlaced: 'Pedido realizado',
-  total: 'Total',
-  // Conditions
-  conditionsDesc: 'Te aseguramos que el pedido llegara a tu casa/tienda en menos de 24/48 horas (Dependiendo de en que zona te encuentres).',
-
-  // About
-  aboutDesc: 'Flover Mascots te ofrece todos los servicios que necesita tu mascota.',
-
-  // Register
-  registerAsNew: 'Registrarse como nuevo usuario',
-  notYetUser: '¿Todavía no eres usuario?',
+  // Customers
+  customers: 'Usuarios',
+  noData: 'No hay resultados',
+  actions: 'Acciones',
+  name: 'Nombre',
+  surnames: 'Apellidos',
+  customersCreate: 'Crear Usuario',
+  'add-valid-email': 'Introduce un correo válido',
+  'valid-input': 'Introduce un valor válido',
+  birthDate: 'Fecha de nacimiento',
   repeatPassword: 'Repetir contraseña',
-  repeatPasswordError: 'Las contraseñas no coinciden',
-  passwordRequeriments: 'La contraseña debe tener 1 número, 1 mayuscula y un mínimo de 6 carácteres',
-  receiveOffers: 'Recibir ofertas por correo',
-  userRegistered: 'Usuario registrado correctamente',
-  invalidEmail: 'Email no válido',
-  notUniqueEmail: 'Email no único',
+  passwordsNoMatch: 'Las contraseñas no coinciden',
+  userCreatedSuccessfully: 'Usuario creado con éxito',
+  userEditedSuccessfully: 'Usuario modificado con éxito',
+  id: 'ID',
+  activated: 'Activado',
+  desactivated: 'Desactivado',
+  USER_DESACTIVATED: 'Usuario desactivado, no puede iniciar sesión',
+  addresses: 'Direcciones',
+  zipCode: 'Código Postal',
+  city: 'Ciudad',
+  street: 'Calle',
+  number: 'Número',
+  additionalInformation: 'Información adicional',
+  addAddress: 'Añadir dirección',
+  save: 'Guardar',
 
-  // RememberPassword
-  dontWorry: '¡No te preocupes!',
-  fillData: 'Rellena los datos',
-  weSendEmail: 'Te enviaremos un correo para restablecer tu contraseña',
-  send: 'Enviar',
-  return: 'Volver',
-  newPassword: 'Introduce la nueva contraseña'
+  // Categories
+  categories: 'Categorías',
+  category: 'Categoría',
+  parentCategory: 'Categoría Padre',
+  es: 'Español',
+  en: 'Ingles',
+  addTranslation: 'Añadir traducción',
+  locale: 'Idioma',
+  title: 'Título',
+  categoriesForm: 'Formulario Categorías',
+  translations: 'Traducciones',
+  categoryCreatedSuccessfully: 'Categoría creada con éxito',
+  categoryEditedSuccessfully: 'Categoría modificada con éxito',
+  state: 'Estado',
+  published: 'Publicado',
+  hidden: 'Oculto',
+
+  // Products
+  productsForm: 'Formulario Productos',
+  addVersion: 'Añadir versión',
+  product: 'Producto',
+  products: 'Productos',
+  saveProduct: 'Guardar Producto',
+  productCreatedSuccessfully: 'Producto creado con éxito',
+  productEditedSuccessfully: 'Producto modificado con éxito',
+  saveProductVersión: 'Guardar Versión',
+  createProductVersión: 'Crear Versión',
+  productVersion: 'Versión',
+  productVersions: 'Versiones',
+  general: 'General',
+  images: 'Imágenes',
+  image: 'Imágen',
+  tags: 'Tags',
+  tag: 'Tag',
+  value: 'Valor',
+  text: 'Texto',
+  shortText: 'Texto corto',
+  price: 'Precio',
+  stock: 'Stock',
+  sku: 'SKU',
+  ean: 'EAN',
+  externalId: 'ID externo',
+  rating: 'Valoración',
+  ratings: 'Valoraciones',
+  date: 'Fecha',
+  user: 'Usuario',
+
+  // Tags
+  tagCreatedSuccessfully: 'Tag creado con éxito',
+  tagEditedSuccessfully: 'Tag modificado con éxito',
+  tagsForm: 'Formulario Tags',
+  addTag: 'Añadir Tag',
+  new: 'Nuevo',
+  newVersion: '*Nueva Versión*',
+
+  // ShippingZones
+  country: 'País',
+  countries: 'Países',
+  region: 'Región',
+  addCountry: 'Añadir País',
+  regions: 'Regiones',
+  shippingZonesForm: 'Formulario Zonas de Envío',
+  shippingZones: 'Zonas de Envío',
+  shippingZoneCreatedSuccessfully: 'Zona de envío creada con éxito',
+  shippingZoneEditedSuccessfully: 'Zona de envío modificada con éxito',
+  selectAll: 'Seleccionar todos',
+
+  // ShippingMethods
+  shippingMethodCreatedSuccessfully: 'Método de envío creado con éxito',
+  shippingMethodEditedSuccessfully: 'Método de envío modificado con éxito',
+  shippingMethodsForm: 'Formulario Métodos de envío',
+  shippingMethods: 'Métodos de envío',
+
+  // PaymentMethods
+  paymentMethodCreatedSuccessfully: 'Método de pago creado con éxito',
+  paymentMethodEditedSuccessfully: 'Método de pago modificado con éxito',
+  paymentMethodsForm: 'Formulario Métodos de pago',
+  paymentMethods: 'Métodos de pago',
+
+  // Posts
+  type: 'Tipo',
+  url: 'Url',
+  post: 'Publicación',
+  posts: 'Publicaciones',
+  postsForm: 'Formulario Publicaciones',
+  slider: 'Slider',
+  postEditedSuccessfully: 'Publicación modificada con éxito',
+  postCreatedSuccessfully: 'Publicación creada con éxito',
+
+  //Orders
+  orders:'Pedidos',
+  ordersForm:'Formulario Pedidos',
+  order:'Pedido',
+  customer: 'Cliente',
+  amount: 'Cantidad',
+  buyId: 'Id de compra externa',
+  addProduct: 'Añadir Producto',
+  shipping: 'Envío',
+  shippingMethod: 'Método de envío',
+  shippingZone: 'Zona de envío',
+  deliveryDate: 'Fecha de envío',
+  billing: 'Facturación',
+  paymentMethod: 'Método de pago',
+  paymentDate: 'Fecha de pago',
+  createdDate: 'Fecha de creación',
+  orderCreatedSuccessfully: 'Pedido creado con éxito',
+  orderEditedSuccessfully: 'Pedido modificado con éxito',
+
+  // Last
+  last: 'Last'
 }

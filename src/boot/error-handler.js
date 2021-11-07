@@ -1,5 +1,7 @@
+import { boot } from 'quasar/wrappers'
+import { i18n } from './i18n'
 
-export default async ({ app, Vue }) => {
+export default boot(({ app }) => {
   /*
   window.onunhandledrejection = function (event) {
     if (event.reason.response.data.error) {
@@ -8,13 +10,17 @@ export default async ({ app, Vue }) => {
     }
   }
   */
-  Vue.config.errorHandler = (err, vm, info) => {
+  app.config.errorHandler = (err, vm, info) => {
     errorHandler(err, vm)
   }
+
+  app.config.globalProperties.errorHandler = errorHandler
 
   function errorHandler (err, vm) {
     let message
     const res = err.response
+    console.log(res)
+
 
     if (res) {
       const status = res.status
@@ -22,14 +28,21 @@ export default async ({ app, Vue }) => {
       if (status === 403) {
         vm.$router.push('/login')
       }
+      if (status === 401) {
+        vm.$router.push('/login')
+      }
 
       if (status >= 400 && status < 500) {
-        message = res.data.error.message
+        if (res.data.error.code) {
+          message = i18n.global.t(res.data.error.code)
+        } else {
+          message = res.data.error.message
+        }
       } else if (status >= 500) {
-        message = vm.$t('internalServerError')
+        message = i18n.global.t('internalServerError')
       }
     } else {
-      message = vm.$t('somethingWentWrong')
+      message = i18n.global.t('somethingWentWrong')
       console.error(err)
     }
 
@@ -38,4 +51,4 @@ export default async ({ app, Vue }) => {
       type: 'negative'
     })
   }
-}
+})

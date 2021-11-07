@@ -1,35 +1,26 @@
-# Flover
+# Florini Admin (florini-admin)
 
-Source code of Flover website.
+A Quasar Framework app
 
-## Getting Started
-
-Launch frontend for development.
-```
-$ quasar dev
+## Install the dependencies
+```bash
+npm install
 ```
 
-Start backend.
-```
-$ npm run back
-```
-
-Build as Progressive Web App 
-```
-$ quasar build --mode pwa
+### Start the app in development mode (hot-code reloading, error reporting, etc.)
+```bash
+quasar dev
 ```
 
-## Built With
+### Lint the files
+```bash
+npm run lint
+```
 
-* [Vue.js](https://vuejs.org/)
-* [Quasar](https://v1.quasar-framework.org/)
-* [nodejs](https://nodejs.org/)
-* [webpack](https://webpack.js.org/)
+### Build the app for production
+```bash
+quasar build
+```
 
-## Add back/server/datasources.json
-{
-  "db": {
-    "name": "db",
-    "connector": "memory"
-  }
-}
+### Customize the configuration
+See [Configuring quasar.conf.js](https://v2.quasar.dev/quasar-cli/quasar-conf-js).

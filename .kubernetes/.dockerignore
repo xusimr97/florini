@@ -1,5 +1,0 @@
-node_modules
-back/node_modules
-cloudbuild.yaml
-kubeconfig.yaml
-Dockerfile

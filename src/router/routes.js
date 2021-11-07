@@ -3,59 +3,13 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      {
-        name: '',
-        path: '',
-        component: () => import('pages/Index.vue')
-      },
-      {
-        name: 'home',
-        path: 'home',
-        component: () => import('pages/Index.vue')
-      },
-      {
-        name: 'catalog',
-        path: 'catalog/:type?',
-        component: () => import('pages/Catalog.vue')
-      },
-
-      {
-        name: 'item',
-        path: 'item/:id?',
-        component: () => import('pages/Item.vue')
-      },
-      {
-        name: 'orders',
-        path: 'orders',
-        component: () => import('pages/Orders.vue')
-      },
-      {
-        name: 'conditions',
-        path: 'conditions',
-        component: () => import('pages/Conditions.vue')
-      },
-      {
-        name: 'about',
-        path: 'about',
-        component: () => import('pages/About.vue')
-      },
-      {
-        name: 'account',
-        path: 'account',
-        component: () => import('pages/Account.vue')
-      },
-      {
-        name: 'suscriptions',
-        path: 'suscriptions',
-        component: () => import('pages/Suscriptions.vue')
-      },
-      {
-        name: 'myMascots',
-        path: 'my-mascots',
-        component: () => import('pages/MyMascots.vue')
-      }
+      { name: 'home', path: '', component: () => import('pages/Index.vue') }
     ]
+    // meta: {
+    //   auth: true
+    // }
   },
+
   {
     path: '/login',
     component: () => import('layouts/LoginLayout.vue'),
@@ -63,33 +17,17 @@ const routes = [
       {
         name: 'login',
         path: '',
-        component: () => import('pages/Login.vue')
-      },
-      {
-        name: 'rememberPassword',
-        path: 'remember-password',
-        component: () => import('pages/RememberPassword.vue')
-      },
-      {
-        name: 'setPassword',
-        path: '/set-password',
-        component: () => import('pages/SetPassword.vue')
-      },
-      {
-        name: 'register',
-        path: 'register',
-        component: () => import('pages/Register.vue')
+        component: () => import('pages/auth/Login.vue')
       }
     ]
+  },
+
+  // Always leave this as last one,
+  // but you can also remove it
+  {
+    path: '/:catchAll(.*)*',
+    component: () => import('pages/Error404.vue')
   }
 ]
-
-// Always leave this as last one
-if (process.env.MODE !== 'ssr') {
-  routes.push({
-    path: '*',
-    component: () => import('pages/Error404.vue')
-  })
-}
 
 export default routes

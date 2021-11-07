@@ -1,13 +1,15 @@
-import VueI18n from 'vue-i18n'
+import { boot } from 'quasar/wrappers'
+import { createI18n } from 'vue-i18n/index'
 import messages from 'src/i18n'
 
-export default async ({ app, Vue }) => {
-  Vue.use(VueI18n)
+const i18n = createI18n({
+  locale: 'es',
+  messages
+})
 
+export default boot(({ app }) => {
   // Set i18n instance on app
-  app.i18n = new VueI18n({
-    locale: 'es',
-    fallbackLocale: 'en',
-    messages
-  })
-}
+  app.use(i18n)
+})
+
+export { i18n }
