@@ -17,10 +17,12 @@
           {{ $t("createAccount") }}
         </router-link>
       </div>
-      <q-btn outline class="flover-social-btn q-mb-md">
+
+      <q-btn outline class="flover-social-btn q-mb-md" @click="onLoginGoogle">
         <q-icon name="app:google" style="font-size: 30px"></q-icon>
       </q-btn>
-      <q-btn outline class="flover-social-btn">
+
+      <q-btn outline class="flover-social-btn" @click="onLoginFacebook">
         <q-icon
           name="fab fa-facebook"
           style="color: #1278f3; font-size: 30px"
@@ -60,7 +62,7 @@
             color="primary"
           />
         </div>
-        <div class="text-body2 q-mb-md">
+        <div class="text-body2 q-mt-md">
           <router-link :to="{ name: 'login' }" class="link">
             {{ $t("notRememberPassword") }}
           </router-link>
@@ -72,6 +74,7 @@
 
 <script>
 import { mapMutations } from "vuex";
+import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 
 export default {
   name: "Login",
@@ -98,6 +101,34 @@ export default {
       // this.setId(res.data.userId);
 
       await this.getUser(res.data.userId);
+    },
+    async onLoginGoogle() {
+      try {
+        const provider = new GoogleAuthProvider();
+        // Start a sign in process for an unauthenticated user.
+        provider.addScope("profile");
+        provider.addScope("email");
+        const response = await signInWithPopup(this.$auth, provider);
+        console.log(response);
+        // const res = await this.$axios.post("Customers/CustomLogin", params);
+        // this.setToken(res.data.id);
+        // await this.getUser(res.data.userId);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async onLoginFacebook() {
+      try {
+        const provider = new FacebookAuthProvider();
+        // Start a sign in process for an unauthenticated user.
+        const response = await signInWithPopup(this.$auth, provider);
+        console.log(response);
+        // const res = await this.$axios.post("Customers/CustomLogin", params);
+        // this.setToken(res.data.id);
+        // await this.getUser(res.data.userId);
+      } catch (error) {
+        console.log(error);
+      }
     },
     async getUser(id) {
       const res = await this.$axios.get(`Customers/${id}`);

@@ -1,8 +1,8 @@
 {
-  "name": "florini-admin",
+  "name": "flover",
   "version": "0.0.1",
-  "description": "A Quasar Framework app",
-  "productName": "Florini Admin",
+  "description": "An Awsome app",
+  "productName": "Flover",
   "author": "Josep <xusimr97@gmail.com>",
   "private": true,
   "scripts": {
@@ -15,6 +15,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "dotenv": "^10.0.0",
+    "firebase": "^9.3.0",
     "quasar": "^2.0.0",
     "vue-i18n": "^9.0.0",
     "vuedraggable": "^4.1.0",
