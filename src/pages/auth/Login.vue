@@ -74,7 +74,11 @@
 
 <script>
 import { mapMutations } from "vuex";
-import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+} from "firebase/auth";
 
 export default {
   name: "Login",
@@ -108,13 +112,15 @@ export default {
         // Start a sign in process for an unauthenticated user.
         provider.addScope("profile");
         provider.addScope("email");
-        const response = await signInWithPopup(this.$auth, provider);
-        console.log(response);
-        // const res = await this.$axios.post("Customers/CustomLogin", params);
-        // this.setToken(res.data.id);
-        // await this.getUser(res.data.userId);
+        const google = await signInWithPopup(this.$auth, provider);
+        const res = await this.$axios.post("Customers/GoogleLogin", {
+          uid: google.user.uid,
+        });
+        this.setToken(res.data.id);
+        await this.getUser(res.data.userId);
       } catch (error) {
         console.log(error);
+        this.errorHandler(error, this);
       }
     },
     async onLoginFacebook() {

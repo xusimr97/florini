@@ -23,6 +23,7 @@ export default {
   pending: 'Pendiente',
   completed: 'Completado',
   canceled: 'Cancelado',
+  USER_NO_EXIST: 'El usuario no existe',
 
   // Home
   home: 'Inicio',
