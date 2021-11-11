@@ -18,7 +18,7 @@
         </router-link>
       </div>
 
-      <q-btn outline class="flover-social-btn q-mb-md" @click="onLoginGoogle">
+      <q-btn outline class="flover-social-btn q-mb-lg" @click="onLoginGoogle">
         <q-icon name="app:google" style="font-size: 30px"></q-icon>
       </q-btn>
 
@@ -29,7 +29,8 @@
         ></q-icon>
       </q-btn>
 
-      <hr class="q-my-md" />
+      <hr class="q-my-lg" />
+
       <q-form @submit="onLogin">
         <div>
           <q-input
@@ -44,6 +45,7 @@
             :type="showPwd ? 'password' : 'text'"
             :rules="[(val) => !!val || $t('inputPassword')]"
             outlined
+            class="q-my-md"
           >
             <template #append>
               <q-icon
@@ -119,21 +121,27 @@ export default {
         this.setToken(res.data.id);
         await this.getUser(res.data.userId);
       } catch (error) {
-        console.log(error);
-        this.errorHandler(error, this);
+        if (error.message !== "Firebase: Error (auth/popup-closed-by-user).") {
+          this.handleError(error, this);
+        }
       }
     },
     async onLoginFacebook() {
       try {
         const provider = new FacebookAuthProvider();
+        provider.addScope("email");
+
         // Start a sign in process for an unauthenticated user.
-        const response = await signInWithPopup(this.$auth, provider);
-        console.log(response);
-        // const res = await this.$axios.post("Customers/CustomLogin", params);
-        // this.setToken(res.data.id);
-        // await this.getUser(res.data.userId);
+        const facebook = await signInWithPopup(this.$auth, provider);
+        const res = await this.$axios.post("Customers/FacebookLogin", {
+          uid: facebook.user.uid,
+        });
+        this.setToken(res.data.id);
+        await this.getUser(res.data.userId);
       } catch (error) {
-        console.log(error);
+        if (error.message !== "Firebase: Error (auth/popup-closed-by-user).") {
+          this.handleError(error, this);
+        }
       }
     },
     async getUser(id) {

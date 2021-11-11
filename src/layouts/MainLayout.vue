@@ -23,18 +23,23 @@
           style="height: 200px"
         >
           <div class="absolute-bottom bg-transparent">
-            <q-avatar size="56px" class="q-mb-sm">
-              <img :src="`avatars/${randomId()}.svg`" />
-            </q-avatar>
-            <div class="text-weight-bold text-subtitle1">
-              {{ customer.username }}
-            </div>
-            <div class="text-weight-bold text-subtitle2">
-              {{ customer.email }}
+            <div v-if="customer.email">
+              <q-avatar size="56px" class="q-mb-sm">
+                <img :src="`avatars/${randomId()}.svg`" />
+              </q-avatar>
+              <div class="text-weight-bold text-subtitle1">
+                {{ customer.username }}
+              </div>
+              <div class="text-weight-bold text-subtitle2">
+                {{ customer.email }}
+              </div>
             </div>
             <div class="row justify-end">
-              <q-btn outline @click="logout">
+              <q-btn outline @click="logout" v-if="customer.email">
                 {{ $t("logout") }}
+              </q-btn>
+              <q-btn outline @click="login" v-else>
+                {{ $t("login") }}
               </q-btn>
             </div>
           </div>
@@ -84,12 +89,19 @@ export default defineComponent({
       customer: this.$store.state.customer,
     };
   },
+  mounted() {
+    console.log(this.$store);
+  },
   methods: {
     randomId(min = 1, max = 9) {
       return Math.floor(Math.random() * (max - min)) + min;
     },
     async logout() {
       await this.$axios.post("Customers/logout");
+      this.$store.commit("customer/setCustomer");
+      await this.$router.push("/auth/login");
+    },
+    async login() {
       await this.$router.push("/auth/login");
     },
   },
