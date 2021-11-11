@@ -1,20 +1,13 @@
 <template>
   <div class="container form">
-    <!-- <q-card-section>
-      <router-link to="/">
-        <div class="row justify-center items-center">
-          <img src="logo.svg" alt="Canini" class="logo-img" />
-        </div>
-      </router-link>
-    </q-card-section> -->
     <q-card-section>
       <div class="text-h5 q-mb-sm text-weight-bold">
-        {{ $t("login") }}
+        {{ $t("createAccount") }}
       </div>
       <div class="text-body1 q-mb-md">
         {{ $t("accountYet") }}
-        <router-link :to="{ name: 'register' }" class="link">
-          {{ $t("createYourAccount") }}
+        <router-link :to="{ name: 'login' }" class="link">
+          {{ $t("login2") }}
         </router-link>
       </div>
 
@@ -33,32 +26,57 @@
 
       <q-form @submit="onLogin">
         <div>
-          <q-input
-            v-model="email"
-            :label="$t('email')"
-            :rules="[(val) => !!val || $t('inputEmail')]"
+          <!-- Name -->
+          <q-input class="q-mt-sm"
             outlined
-            name="email"
-            autocomplete="email"
+            v-model="form.name.value"
+            :label="$t('name')"
+            lazy-rules
+            :rules="form.name.rules"
+            :disable="form.disabled"
           />
-          <q-input
-            v-model="password"
-            :label="$t('password')"
-            :type="showPwd ? 'password' : 'text'"
-            :rules="[(val) => !!val || $t('inputPassword')]"
+
+          <!-- Surnames -->
+          <q-input class="q-mt-sm"
             outlined
-            class="q-my-sm"
-            name="current-password"
-            autocomplete="current-password"
-          >
-            <template #append>
-              <q-icon
-                :name="showPwd ? 'visibility_off' : 'visibility'"
-                class="cursor-pointer"
-                @click="showPwd = !showPwd"
-              />
-            </template>
-          </q-input>
+            v-model="form.surnames.value"
+            :label="$t('surnames')"
+            lazy-rules
+            :rules="form.surnames.rules"
+            :disable="form.disabled"
+          />
+
+          <!-- Email -->
+          <q-input class="q-mt-sm"
+            outlined
+            v-model="form.email.value"
+            :label="$t('email')"
+            lazy-rules
+            :rules="form.email.rules"
+            :disable="form.disabled"
+          />
+
+          <!-- Password -->
+          <q-input class="q-mt-sm"
+            outlined
+            v-model="form.password.value"
+            :label="$t('password')"
+            lazy-rules
+            :rules="form.password.rules"
+            :disable="form.disabled"
+            type="password"
+          />
+
+          <!-- RepeatPassword -->
+          <q-input class="q-mt-sm"
+            outlined
+            v-model="form.repeatPassword.value"
+            :label="$t('repeatPassword')"
+            lazy-rules
+            :rules="form.repeatPassword.rules"
+            :disable="form.disabled"
+            type="password"
+          />
         </div>
         <div class="justify-center">
           <q-btn
@@ -87,17 +105,74 @@ import {
 } from "firebase/auth";
 
 export default {
-  name: "Login",
+  name: "Register",
   data() {
     return {
       $t: this.$t,
-      email: null,
-      password: null,
-      showPwd: true,
-      emailError: false,
-      emailMessage: "",
-      pwdError: false,
-      pwdMessage: "",
+      form: {
+        email: {
+          value: null,
+          rules: [
+            (val) => {
+              const re =
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+              if (re.test(String(val).toLowerCase())) {
+                return true;
+              } else {
+                return this.$t("add-valid-email");
+              }
+            },
+          ],
+        },
+        state: {
+          value: null,
+          rules: [(val) => val !== null || this.$t("valid-input")],
+        },
+        name: {
+          value: null,
+          rules: [
+            (val) => (val && val.length !== null) || this.$t("valid-input"),
+          ],
+        },
+        surnames: {
+          value: null,
+          rules: [
+            (val) => (val && val.length !== null) || this.$t("valid-input"),
+          ],
+        },
+        birthDate: {
+          value: null,
+          rules: [
+            (val) => (val && val.length !== null) || this.$t("valid-input"),
+          ],
+        },
+        password: {
+          value: null,
+          rules: [
+            (val) => {
+              if (this.action !== "edit") {
+                return (val && val.length > 7) || this.$t("valid-input");
+              } else {
+                return true;
+              }
+            },
+          ],
+        },
+        repeatPassword: {
+          value: null,
+          rules: [
+            (val) => {
+              if (this.action !== "edit") {
+                return (val && val.length > 7) || this.$t("valid-input");
+              } else {
+                return true;
+              }
+            },
+            (val) =>
+              val === this.form.password.value || this.$t("passwordsNoMatch"),
+          ],
+        },
+      },
     };
   },
   methods: {
