@@ -24,10 +24,22 @@
 
       <hr class="q-my-lg" />
 
-      <q-form @submit="onLogin">
+      <q-form @submit="onRegister">
         <div>
+          <!-- Email -->
+          <q-input
+            class="q-mt-sm"
+            outlined
+            v-model="form.email.value"
+            :label="$t('email')"
+            lazy-rules
+            :rules="form.email.rules"
+            :disable="form.disabled"
+          />
+
           <!-- Name -->
-          <q-input class="q-mt-sm"
+          <q-input
+            class="q-mt-sm"
             outlined
             v-model="form.name.value"
             :label="$t('name')"
@@ -37,7 +49,8 @@
           />
 
           <!-- Surnames -->
-          <q-input class="q-mt-sm"
+          <q-input
+            class="q-mt-sm"
             outlined
             v-model="form.surnames.value"
             :label="$t('surnames')"
@@ -46,18 +59,22 @@
             :disable="form.disabled"
           />
 
-          <!-- Email -->
-          <q-input class="q-mt-sm"
+          <!-- Phone -->
+          <q-input
+            class="q-mt-sm"
             outlined
-            v-model="form.email.value"
-            :label="$t('email')"
+            v-model="form.phone.value"
+            :label="$t('phone')"
             lazy-rules
-            :rules="form.email.rules"
+            :rules="form.phone.rules"
             :disable="form.disabled"
+            mask="(+##) #########"
+            fill-mask
           />
 
           <!-- Password -->
-          <q-input class="q-mt-sm"
+          <q-input
+            class="q-mt-sm"
             outlined
             v-model="form.password.value"
             :label="$t('password')"
@@ -68,7 +85,8 @@
           />
 
           <!-- RepeatPassword -->
-          <q-input class="q-mt-sm"
+          <q-input
+            class="q-mt-sm"
             outlined
             v-model="form.repeatPassword.value"
             :label="$t('repeatPassword')"
@@ -119,39 +137,33 @@ export default {
               if (re.test(String(val).toLowerCase())) {
                 return true;
               } else {
-                return this.$t("add-valid-email");
+                return this.$t("validInput");
               }
             },
           ],
         },
-        state: {
-          value: null,
-          rules: [(val) => val !== null || this.$t("valid-input")],
-        },
         name: {
           value: null,
           rules: [
-            (val) => (val && val.length !== null) || this.$t("valid-input"),
+            (val) => (val && val.length !== null) || this.$t("validInput"),
           ],
         },
         surnames: {
           value: null,
           rules: [
-            (val) => (val && val.length !== null) || this.$t("valid-input"),
+            (val) => (val && val.length !== null) || this.$t("validInput"),
           ],
         },
-        birthDate: {
+        phone: {
           value: null,
-          rules: [
-            (val) => (val && val.length !== null) || this.$t("valid-input"),
-          ],
+          rules: [],
         },
         password: {
           value: null,
           rules: [
             (val) => {
               if (this.action !== "edit") {
-                return (val && val.length > 7) || this.$t("valid-input");
+                return (val && val.length > 7) || this.$t("validInput");
               } else {
                 return true;
               }
@@ -163,7 +175,7 @@ export default {
           rules: [
             (val) => {
               if (this.action !== "edit") {
-                return (val && val.length > 7) || this.$t("valid-input");
+                return (val && val.length > 7) || this.$t("validInput");
               } else {
                 return true;
               }
@@ -176,7 +188,7 @@ export default {
     };
   },
   methods: {
-    async onLogin() {
+    async onRegister() {
       let params = {
         email: this.email,
         password: this.password,
