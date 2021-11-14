@@ -55,6 +55,11 @@ export default {
   repeatPassword: 'Repetir contraseña',
   phone: 'Número de teléfono',
 
+  // RememberPassword
+  rememberPassword: 'Recuperar contraseña',
+  rememberPasswordText:
+    'Introduce el correo electrónico con el que te registraste y te enviaremos un enlace para cambiar la contraseña',
+
   // Last
   last: 'Last'
 }

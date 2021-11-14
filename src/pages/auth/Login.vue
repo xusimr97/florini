@@ -69,7 +69,7 @@
           />
         </div>
         <div class="text-body2 q-mt-md">
-          <router-link :to="{ name: 'login' }" class="link">
+          <router-link :to="{ name: 'rememberPassword' }" class="link">
             {{ $t("notRememberPassword") }}
           </router-link>
         </div>

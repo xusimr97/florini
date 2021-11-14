@@ -24,6 +24,16 @@ const routes = [
         name: 'register',
         path: 'register',
         component: () => import('pages/auth/Register.vue')
+      },
+      {
+        name: 'rememberPassword',
+        path: 'remember-password',
+        component: () => import('pages/auth/RememberPassword.vue')
+      },
+      {
+        name: 'setPassword',
+        path: 'set-password',
+        component: () => import('pages/auth/SetPassword.vue')
       }
     ]
   },

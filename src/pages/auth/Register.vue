@@ -96,18 +96,13 @@
             type="password"
           />
         </div>
-        <div class="justify-center">
+        <div class="justify-center q-mt-md">
           <q-btn
             type="submit"
             :label="$t('enter')"
             class="flover-btn"
             color="primary"
           />
-        </div>
-        <div class="text-body2 q-mt-md">
-          <router-link :to="{ name: 'login' }" class="link">
-            {{ $t("notRememberPassword") }}
-          </router-link>
         </div>
       </q-form>
     </q-card-section>
@@ -190,13 +185,14 @@ export default {
   methods: {
     async onRegister() {
       let params = {
-        email: this.email,
-        password: this.password,
+        email: this.form.email.value,
+        password: this.form.password.value,
+        name: this.form.name.value,
+        surnames: this.form.surnames.value,
+        phone: this.form.phone.value,
       };
-      const res = await this.$axios.post("Customers/CustomLogin", params);
+      const res = await this.$axios.post("Customers/CustomRegister", params);
       this.setToken(res.data.id);
-      // this.setId(res.data.userId);
-
       await this.getUser(res.data.userId);
     },
     async onLoginGoogle() {
