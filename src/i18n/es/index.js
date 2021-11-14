@@ -59,7 +59,12 @@ export default {
   rememberPassword: 'Recuperar contraseña',
   rememberPasswordText:
     'Introduce el correo electrónico con el que te registraste y te enviaremos un enlace para cambiar la contraseña',
-
+  changePassword: 'Cambiar contraseña',
+  changePasswordText:
+    'Rellena el formulario para cambiar la contraseña de tu cuenta',
+  emailSended: 'Correo electrónico enviado con éxito',
+  passwordChanged: 'Contraseña modificada con éxito',
+  INVALID_TOKEN: 'El token ha caducado, vuelve a pedir uno nuevo',
   // Last
   last: 'Last'
 }

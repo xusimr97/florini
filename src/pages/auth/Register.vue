@@ -99,7 +99,7 @@
         <div class="justify-center q-mt-md">
           <q-btn
             type="submit"
-            :label="$t('enter')"
+            :label="$t('send')"
             class="flover-btn"
             color="primary"
           />

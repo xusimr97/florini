@@ -1,120 +1,120 @@
 <template>
-  <div>
-    <q-card-section class="q-mb-md">
-      <img src="statics/logo.svg" alt="Flover" />
-    </q-card-section>
+  <div class="container form">
     <q-card-section>
-      <q-item-label id="dontWorry">
-        {{ $t("newPassword") }}
-      </q-item-label>
-    </q-card-section>
-    <q-card-section>
-      <q-input
-        filled
-        v-model="password"
-        :label="$t('password')"
-        :type="showPwd ? 'password' : 'text'"
-      >
-        <template v-slot:append>
-          <q-icon
-            :name="showPwd ? 'visibility_off' : 'visibility'"
-            class="cursor-pointer"
-            @click="showPwd = !showPwd"
+      <div class="text-h5 q-mb-sm text-weight-bold">
+        {{ $t("changePassword") }}
+      </div>
+      <div class="text-body1 q-mb-md text-justify">
+        {{ $t("changePasswordText") }}
+      </div>
+
+      <q-form @submit="onResetPassword">
+        <div>
+          <!-- Password -->
+          <q-input
+            class="q-mt-sm"
+            outlined
+            v-model="form.password.value"
+            :label="$t('password')"
+            lazy-rules
+            :rules="form.password.rules"
+            :disable="form.disabled"
+            type="password"
           />
-        </template>
-      </q-input>
-      <q-input
-        filled
-        hint=""
-        :error-message="$t('repeatPasswordError')"
-        :error="!this.valid"
-        v-model="repeatPassword"
-        :label="$t('repeatPassword')"
-        :type="showRPwd ? 'password' : 'text'"
-        @blur="checkPasswords()"
-      >
-        <template v-slot:append>
-          <q-icon
-            :name="showRPwd ? 'visibility_off' : 'visibility'"
-            class="cursor-pointer"
-            @click="showRPwd = !showRPwd"
+
+          <!-- RepeatPassword -->
+          <q-input
+            class="q-mt-sm"
+            outlined
+            v-model="form.repeatPassword.value"
+            :label="$t('repeatPassword')"
+            lazy-rules
+            :rules="form.repeatPassword.rules"
+            :disable="form.disabled"
+            type="password"
           />
-        </template>
-      </q-input>
-    </q-card-section>
-    <q-card-section class="justify-center q-mt-md">
-      <q-btn
-        rounded
-        class="full-width"
-        color="black"
-        :label="$t('send')"
-        @click="onSend"
-        :disable="checkInputs()"
-      />
+        </div>
+        <div class="justify-center q-mt-md">
+          <q-btn
+            type="submit"
+            :label="$t('send')"
+            class="flover-btn"
+            color="primary"
+          />
+        </div>
+      </q-form>
     </q-card-section>
   </div>
 </template>
 
-<style scoped>
-.remember {
-  position: fixed;
-}
-.q-card {
-  max-width: 320px;
-}
-#sectionNotYetUser {
-  margin: 0 auto;
-  text-align: center;
-}
-
-#dontWorry {
-  font-size: 24px;
-  text-align: center;
-  opacity: 0.6;
-}
-#weSendEmail {
-  opacity: 0.5;
-  text-align: center;
-}
-</style>
-
 <script>
 export default {
-  name: "SetPassword",
+  name: "Register",
   data() {
     return {
-      password: "",
-      repeatPassword: "",
-      showPwd: true,
-      showRPwd: true,
-      valid: true,
+      $t: this.$t,
+      form: {
+        password: {
+          value: null,
+          rules: [
+            (val) => {
+              if (this.action !== "edit") {
+                return (val && val.length > 7) || this.$t("validInput");
+              } else {
+                return true;
+              }
+            },
+          ],
+        },
+        repeatPassword: {
+          value: null,
+          rules: [
+            (val) => {
+              if (this.action !== "edit") {
+                return (val && val.length > 7) || this.$t("validInput");
+              } else {
+                return true;
+              }
+            },
+            (val) =>
+              val === this.form.password.value || this.$t("passwordsNoMatch"),
+          ],
+        },
+      },
     };
   },
   methods: {
-    onSend() {
-      let token = this.$route.query.access_token;
+    async onResetPassword() {
       let params = {
-        newPassword: this.password,
+        password: this.form.password.value,
+        token: this.$route.query.access_token,
       };
-      this.$axios
-        .post("customers/reset-password" + "?access_token=" + token, params)
-        .then((response) => {
-          this.$router.push("/home");
-        });
-    },
-    checkInputs() {
-      if (this.password !== "" && this.repeatPassword !== "") {
-        return false;
-      }
-      return true;
-    },
-    checkPasswords() {
-      if (this.password === this.repeatPassword) {
-        this.valid = true;
-      } else {
-        this.valid = false;
-      }
+
+      const res = await this.$axios.post("Customers/SetPassword", params);
+
+      this.$q.notify({
+        message: this.$t("passwordChanged"),
+        type: "positive",
+      });
+
+      await this.$router.push({ name: "login" });
     },
   },
 };
 </script>
+<style scoped>
+.form {
+  max-width: 500px;
+}
+
+.logo-img {
+  width: 90%;
+}
+
+.flover-social-btn {
+  height: 56px;
+  width: 100%;
+  border-radius: 7px;
+  color: #c2c2c2;
+}
+</style>

@@ -24,7 +24,7 @@
         <div class="justify-center q-mt-md">
           <q-btn
             type="submit"
-            :label="$t('enter')"
+            :label="$t('send')"
             class="flover-btn"
             color="primary"
           />
@@ -64,8 +64,12 @@ export default {
         email: this.form.email.value,
       };
       const res = await this.$axios.post("Customers/ResetPassword", params);
-      // this.setToken(res.data.id);
-      // await this.getUser(res.data.userId);
+
+      this.$q.notify({
+        message: this.$t("emailSended"),
+        type: "positive",
+      });
+      await this.$router.push({ name: "login" });
     },
   },
 };
