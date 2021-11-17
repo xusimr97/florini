@@ -11,6 +11,7 @@
       padding
       class="bg-grey-10 shadow-1 main-carousel"
       ref="carousel"
+      infinite
     >
       <q-carousel-slide
         v-for="item in slides"
@@ -19,10 +20,10 @@
         :name="item.id"
         class="column no-wrap bg-slider"
       >
-        <div class="slide-text q-mt-md text-h4 text-center">
+        <div class="slide-text q-mt-md text-h4 text-center q-px-sm">
           {{ item.postTranslations[0]?.title }}
         </div>
-        <div class="slide-text q-mt-md text-h5 text-center">
+        <div class="slide-text q-mt-md text-h5 text-center q-px-md">
           {{ item.postTranslations[0]?.text }}
         </div>
         <div class="carousel-backdrop"></div>
@@ -130,13 +131,15 @@
   z-index: 2;
   top: 50%;
   left: 0;
-  margin-top: -16px !important;
+  margin-top: -17px !important;
+  margin-left: 5px !important;
 }
 .custom-control-next {
   z-index: 2;
   top: 50%;
   right: 0;
-  margin-top: -16px !important;
+  margin-top: -17px !important;
+  margin-right: 5px !important;
 }
 
 .backDrop {
@@ -151,23 +154,8 @@ export default {
   data() {
     return {
       slide: null,
-      slides: [
-        // {
-        //   image: "statics/carousel/banner-1.png",
-        //   id: "banner-1",
-        // },
-        // {
-        //   image: "statics/carousel/banner-2.png",
-        //   id: "banner-2",
-        // },
-      ],
-      news: [
-        // {
-        //   id: "a",
-        //   image: "statics/resources/noticia-1.png",
-        //   text: null,
-        // },
-      ],
+      slides: [],
+      news: [],
     };
   },
 
@@ -191,7 +179,7 @@ export default {
         return post;
       });
     this.slide = this.slides[0]?.id;
-    console.log(this.slide);
+
     this.news = response.data
       .filter((post) => post.type === "post")
       .map((post) => {
