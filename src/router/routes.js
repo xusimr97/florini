@@ -3,7 +3,12 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { name: 'home', path: '', component: () => import('pages/Index.vue') }
+      { name: 'home', path: '', component: () => import('pages/Index.vue') },
+      {
+        name: 'products',
+        path: 'products/:category?',
+        component: () => import('pages/products/List.vue')
+      }
     ]
     // meta: {
     //   auth: true

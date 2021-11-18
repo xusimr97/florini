@@ -9,13 +9,71 @@
         <q-btn flat round :to="{ name: 'home' }">
           <q-icon name="app:icon-white" class="header-icon"></q-icon>
         </q-btn>
-        <q-btn flat round>
-          <q-icon name="app:cart" class="header-icon-2 img-white"></q-icon>
-        </q-btn>
+        <div>
+          <q-btn flat round>
+            <q-icon
+              name="app:user"
+              class="header-icon-2 img-white"
+              @click="rightDrawerOpen = !rightDrawerOpen"
+            ></q-icon>
+          </q-btn>
+          <q-btn flat round>
+            <q-icon name="app:cart" class="header-icon-2 img-white"></q-icon>
+          </q-btn>
+        </div>
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
+    <!-- Main Drawer -->
+    <q-drawer v-model="leftDrawerOpen" bordered behavior="mobile">
+      <!-- <div v-if="customer.email" class="q-mv-sm"></div> -->
+      <div>
+        <q-img
+          src="https://cdn.quasar.dev/img/material.png"
+          style="height: 200px"
+        >
+          <div class="absolute-bottom bg-transparent">
+            <div v-if="customer.email">
+              <q-avatar size="56px" class="q-mb-sm">
+                <img :src="`avatars/${randomId()}.svg`" />
+              </q-avatar>
+              <div class="text-weight-bold text-subtitle1">
+                {{ customer.username }}
+              </div>
+              <div class="text-weight-bold text-subtitle2">
+                {{ customer.email }}
+              </div>
+            </div>
+            <div class="row justify-end">
+              <q-btn outline @click="logout" v-if="customer.email">
+                {{ $t("logout") }}
+              </q-btn>
+              <q-btn outline @click="login" v-else>
+                {{ $t("login") }}
+              </q-btn>
+            </div>
+          </div>
+        </q-img>
+      </div>
+      <q-list>
+        <q-item
+          v-for="page of pages"
+          :key="page.nameUrl"
+          clickable
+          :to="{ name: page.nameUrl }"
+        >
+          <q-item-section v-if="page.icon" avatar>
+            <q-icon :name="page.icon" class="image-primary-filter" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>{{ $t(page.title) }}</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </q-drawer>
+
+    <!-- Account Drawer -->
+    <q-drawer v-model="rightDrawerOpen" bordered behavior="mobile" side="right">
       <!-- <div v-if="customer.email" class="q-mv-sm"></div> -->
       <div>
         <q-img
@@ -85,6 +143,7 @@ export default defineComponent({
     return {
       $t: this.$t,
       leftDrawerOpen: false,
+      rightDrawerOpen: false,
       pages: pages,
       customer: this.$store.state.customer,
     };

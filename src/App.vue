@@ -14,6 +14,7 @@ export default defineComponent({
       "app:google": "google.svg",
       "app:icon": "icon.svg",
       "app:icon-white": "icon-white.svg",
+      "app:user": "user.svg",
     };
     this.$q.iconMapFn = (iconName) => {
       const icon = myIcons[iconName];

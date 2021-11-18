@@ -19,9 +19,6 @@ export default boot(({ app }) => {
   function errorHandler (err, vm) {
     let message
     const res = err.response
-    console.log(res)
-
-
     if (res) {
       const status = res.status
 
@@ -41,14 +38,13 @@ export default boot(({ app }) => {
       } else if (status >= 500) {
         message = i18n.global.t('internalServerError')
       }
+      vm.$q.notify({
+        message: message,
+        type: 'negative'
+      })
     } else {
       message = i18n.global.t('somethingWentWrong')
       console.error(err)
     }
-
-    vm.$q.notify({
-      message: message,
-      type: 'negative'
-    })
   }
 })
