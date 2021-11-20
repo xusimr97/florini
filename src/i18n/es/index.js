@@ -65,6 +65,10 @@ export default {
   emailSended: 'Correo electrónico enviado con éxito',
   passwordChanged: 'Contraseña modificada con éxito',
   INVALID_TOKEN: 'El token ha caducado, vuelve a pedir uno nuevo',
+
+  // Products
+  categories: 'Categorías',
+
   // Last
   last: 'Last'
 }

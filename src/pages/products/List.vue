@@ -1,6 +1,6 @@
 <template>
   <!-- eslint-disable vue/no-template-shadow -->
-  <div>
+  <div class="q-mt-md">
     <q-drawer v-model="rightDrawerOpen" side="right" elevated>
       <q-list>
         <q-item-label header>{{ $t("categories") }}</q-item-label>
@@ -39,7 +39,7 @@
 
     <!-- Desktop -->
     <div
-      class="q-pa-md row justify-center q-gutter-md container"
+      class="q-pa-md row justify-start q-gutter-md container"
       v-if="$q.platform.is.desktop"
     >
       <q-spinner v-if="isLoading" color="primary" size="50px"> </q-spinner>
@@ -50,26 +50,25 @@
         @click="$router.push({ name: 'item', params: { id: item.id } })"
       >
         <q-img
-          :src="item.image"
-          placeholder-src="statics/resources/noticia-1.png"
+          :src="imageBasePath + item.productVersions[0]?.images[0]?.url"
+          placeholder-src="logo2.svg"
           basic
           class="item-img"
         >
         </q-img>
         <q-card-section>
-          <div class="name text-h6">{{ item[`name_${$i18n.locale}`] }}</div>
-          <q-rating size="24px" v-model="item.stars" :max="5" readonly />
+          <div class="name text-h6">
+            {{ item.productVersions[0]?.productVersionTranslations[0].title }}
+          </div>
+          <div class="description text-justify">
+            {{
+              item.productVersions[0]?.productVersionTranslations[0].shortText
+            }}
+          </div>
+          <div class="text-h6">
+            {{ item.productVersions[0]?.price + "€" }}
+          </div>
         </q-card-section>
-        <q-card-section class="description">
-          {{ item[`description_${$i18n.locale}`] }}
-        </q-card-section>
-        <q-card-section>
-          {{ currency(item.price) }}
-        </q-card-section>
-        <!-- <q-card-actions class="justify-end">
-          <q-btn flat>{{ $t("more") }}</q-btn>
-          <q-btn flat>{{ $t("buy") }}</q-btn>
-        </q-card-actions> -->
       </q-card>
     </div>
 
@@ -83,25 +82,24 @@
         @click="$router.push({ name: 'item', params: { id: item.id } })"
       >
         <q-img
-          :src="item.image"
-          placeholder-src="statics/resources/noticia-1.png"
+          :src="imageBasePath + item.productVersions[0]?.images[0]?.url"
+          placeholder-src="logo2.svg"
           basic
           class="mobile-item-img col-4"
           :img-style="{ 'background-size': 'contain' }"
         >
         </q-img>
         <div class="col-8 q-pa-sm">
-          <div>
-            <div class="name text-subtitle1">
-              {{ item[`name_${$i18n.locale}`] }}
-            </div>
-            <q-rating size="18px" v-model="item.stars" :max="5" readonly />
+          <div class="name text-subtitle1">
+            {{ item.productVersions[0]?.productVersionTranslations[0].title }}
           </div>
-          <div class="description">
-            {{ item[`description_${$i18n.locale}`] }}
+          <div class="description text-justify">
+            {{
+              item.productVersions[0]?.productVersionTranslations[0].shortText
+            }}
           </div>
-          <div>
-            {{ currency(item.price) }}
+          <div class="text-subtitle1 q-mt-xs">
+            {{ item.productVersions[0]?.price + "€" }}
           </div>
         </div>
       </q-card>
@@ -133,7 +131,9 @@
   text-overflow: ellipsis;
 }
 .my-card .description {
-  height: 40px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 .my-card .item-img {
@@ -162,11 +162,9 @@ export default {
     return {
       isLoading: false,
       items: null,
-      itemTypes: null,
-      itemType: null,
       rightDrawerOpen: this.$q.platform.is.desktop,
-      itemCategory: null,
       categories: null,
+      imageBasePath: process.env.imageUrl,
     };
   },
   async mounted() {
@@ -234,21 +232,19 @@ export default {
                         limit: 1,
                       },
                     },
-                    {
-                      relation: "ratings",
-                      scope: {
-                        fields: { value: true },
-                      },
-                    },
                   ],
                 },
               },
             ],
+            where: {
+              categoryId: category,
+            },
           },
         };
         const response = await this.$axios.get(`Products/`, { params });
         this.products = response.data;
         this.items = response.data;
+        console.log(this.items);
       } catch (error) {
         this.$q.notify({
           message: this.$t(error.message),
@@ -260,9 +256,6 @@ export default {
         }
       }
     },
-  },
-  computed: {
-    currency: (i) => (i ? i.toFixed(2) + "€" : i),
   },
 };
 </script>
