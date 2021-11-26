@@ -75,6 +75,7 @@ export default {
   // Products
   categories: 'Categorías',
   products: 'Productos',
+  noProducts: 'No hay productos en esta categoría',
 
   // Last
   last: 'Last'
