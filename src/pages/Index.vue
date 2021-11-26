@@ -82,6 +82,53 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: "PageIndex",
+  data() {
+    return {
+      slide: null,
+      slides: [],
+      news: [],
+    };
+  },
+
+  async mounted() {
+    let params = {
+      filter: {
+        where: { state: true },
+        include: [
+          {
+            relation: "postTranslations",
+            scope: { where: { locale: this.$i18n.locale } },
+          },
+        ],
+      },
+    };
+    let response = await this.$axios.get("Posts", { params });
+    this.slides = response.data
+      .filter((post) => post.type === "slider")
+      .map((post) => {
+        post.image = process.env.imageUrl + post.image;
+        return post;
+      });
+    this.slide = this.slides[0]?.id;
+
+    this.news = response.data
+      .filter((post) => post.type === "post")
+      .map((post) => {
+        post.image = process.env.imageUrl + post.image;
+        return post;
+      });
+    // this.offers = this.offers.concat(res.data);
+
+    // params = { filter: { where: { type: "slider" } } };
+    // res = await this.$axios.get("Posts", { params });
+    // this.slides = this.slides.concat(res.data);
+  },
+};
+</script>
+
 <style scoped>
 @media (max-width: 633px) {
   .q-carousel__slide {
@@ -147,50 +194,3 @@
   height: 100%;
 }
 </style>
-
-<script>
-export default {
-  name: "PageIndex",
-  data() {
-    return {
-      slide: null,
-      slides: [],
-      news: [],
-    };
-  },
-
-  async mounted() {
-    let params = {
-      filter: {
-        where: { state: true },
-        include: [
-          {
-            relation: "postTranslations",
-            scope: { where: { locale: this.$i18n.locale } },
-          },
-        ],
-      },
-    };
-    let response = await this.$axios.get("Posts", { params });
-    this.slides = response.data
-      .filter((post) => post.type === "slider")
-      .map((post) => {
-        post.image = process.env.imageUrl + post.image;
-        return post;
-      });
-    this.slide = this.slides[0]?.id;
-
-    this.news = response.data
-      .filter((post) => post.type === "post")
-      .map((post) => {
-        post.image = process.env.imageUrl + post.image;
-        return post;
-      });
-    // this.offers = this.offers.concat(res.data);
-
-    // params = { filter: { where: { type: "slider" } } };
-    // res = await this.$axios.get("Posts", { params });
-    // this.slides = this.slides.concat(res.data);
-  },
-};
-</script>

@@ -7,7 +7,7 @@ const routes = [
       {
         name: 'products',
         path: 'products/:category?',
-        component: () => import('pages/products/List.vue')
+        component: () => import('pages/product/ProductList.vue')
       }
     ]
     // meta: {

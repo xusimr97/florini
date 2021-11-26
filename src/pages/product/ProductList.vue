@@ -37,30 +37,34 @@
       </q-list>
     </q-drawer>
 
-    <!-- Desktop -->
-    <div
-      class="q-pa-md row justify-start q-gutter-md container"
-      v-if="$q.platform.is.desktop"
-    >
+    <div class="flex flex-center">
       <q-spinner v-if="isLoading" color="primary" size="50px"> </q-spinner>
-      <q-card
-        class="my-card"
-        v-for="item in items"
-        :key="item.id"
-        @click="$router.push({ name: 'item', params: { id: item.id } })"
-      >
-        <q-img
-          :src="imageBasePath + item.productVersions[0]?.images[0]?.url"
-          placeholder-src="logo2.svg"
-          basic
-          class="item-img"
+    </div>
+
+    <div class="q-pa-md container list-products">
+      <q-card class="product-card" v-for="item in items" :key="item.id">
+        <!-- Slider -->
+        <q-carousel
+          animated
+          v-model="item.slide"
+          arrows
+          navigation
+          infinite
+          control-color="primary"
         >
-        </q-img>
+          <q-carousel-slide
+            v-for="image in item.productVersions[0]?.images"
+            :key="image.id"
+            :name="image.order"
+            :img-src="imageBasePath + image.url"
+          />
+        </q-carousel>
+
         <q-card-section>
-          <div class="name text-h6">
+          <div class="name text-h6 text-justify">
             {{ item.productVersions[0]?.productVersionTranslations[0].title }}
           </div>
-          <div class="description text-justify">
+          <div class="description text-justify q-my-md">
             {{
               item.productVersions[0]?.productVersionTranslations[0].shortText
             }}
@@ -69,39 +73,6 @@
             {{ item.productVersions[0]?.price + "€" }}
           </div>
         </q-card-section>
-      </q-card>
-    </div>
-
-    <!-- Mobile -->
-    <div class="q-pa-md container" v-else>
-      <q-spinner v-if="isLoading" color="primary" size="50px"> </q-spinner>
-      <q-card
-        v-for="item in items"
-        :key="item.id"
-        class="row q-mb-sm my-card-mobile"
-        @click="$router.push({ name: 'item', params: { id: item.id } })"
-      >
-        <q-img
-          :src="imageBasePath + item.productVersions[0]?.images[0]?.url"
-          placeholder-src="logo2.svg"
-          basic
-          class="mobile-item-img col-4"
-          :img-style="{ 'background-size': 'contain' }"
-        >
-        </q-img>
-        <div class="col-8 q-pa-sm">
-          <div class="name text-subtitle1">
-            {{ item.productVersions[0]?.productVersionTranslations[0].title }}
-          </div>
-          <div class="description text-justify">
-            {{
-              item.productVersions[0]?.productVersionTranslations[0].shortText
-            }}
-          </div>
-          <div class="text-subtitle1 q-mt-xs">
-            {{ item.productVersions[0]?.price + "€" }}
-          </div>
-        </div>
       </q-card>
     </div>
 
@@ -120,44 +91,9 @@
   </div>
 </template>
 
-<style>
-.my-card {
-  width: 100%;
-  max-width: 250px;
-}
-.my-card .name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.my-card .description {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.my-card .item-img {
-  max-width: 100%;
-  height: 250px;
-}
-.my-card-mobile .name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.my-card-mobile .description {
-  height: 40px;
-  overflow: hidden;
-}
-.my-card-mobile .mobile-item-img {
-  height: 150px;
-  background-color: #f8f8f8;
-}
-</style>
-
 <script>
 export default {
-  name: "Catalog",
+  name: "ProductList",
   data() {
     return {
       isLoading: false,
@@ -189,7 +125,7 @@ export default {
       this.categories = response.data.filter(
         (cat) => cat.parentCategoryId === null
       );
-      await this.loadCategory(this.categories[0].id);
+      await this.loadProductsCategory(this.categories[0].id);
     } catch (error) {
       this.$q.notify({
         message: this.$t(error.message),
@@ -201,11 +137,11 @@ export default {
   },
   watch: {
     "$route.params.category": async function (category) {
-      await this.loadCategory(category);
+      await this.loadProductsCategory(category);
     },
   },
   methods: {
-    async loadCategory(category, showLoading = false) {
+    async loadProductsCategory(category, showLoading = false) {
       try {
         if (showLoading) {
           this.isLoading = true;
@@ -228,8 +164,7 @@ export default {
                     {
                       relation: "images",
                       scope: {
-                        where: { order: 0 },
-                        limit: 1,
+                        order: "order ASC",
                       },
                     },
                   ],
@@ -242,9 +177,10 @@ export default {
           },
         };
         const response = await this.$axios.get(`Products/`, { params });
-        this.products = response.data;
+        response.data.forEach((item) => {
+          item.slide = 0;
+        });
         this.items = response.data;
-        console.log(this.items);
       } catch (error) {
         this.$q.notify({
           message: this.$t(error.message),
@@ -259,3 +195,67 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.list-products {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+
+  .product-card {
+    .product-card-image {
+      height: 20rem;
+    }
+
+    .name {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .description {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+}
+
+/* .my-card {
+  width: 100%;
+  max-width: 250px;
+}
+
+.my-card .name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.my-card .description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.my-card .item-img {
+  max-width: 100%;
+  height: 250px;
+} */
+/* .my-card-mobile .name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.my-card-mobile .description {
+  height: 40px;
+  overflow: hidden;
+}
+.my-card-mobile .mobile-item-img {
+  height: 150px;
+  background-color: #f8f8f8;
+} */
+</style>

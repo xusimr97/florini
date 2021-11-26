@@ -135,6 +135,11 @@ const pages = [
     title: "home",
     nameUrl: "home",
   },
+  {
+    icon: "app:flower",
+    title: "products",
+    nameUrl: "products",
+  },
 ];
 
 export default defineComponent({
@@ -148,9 +153,7 @@ export default defineComponent({
       customer: this.$store.state.customer,
     };
   },
-  mounted() {
-    console.log(this.$store);
-  },
+  mounted() {},
   methods: {
     randomId(min = 1, max = 9) {
       return Math.floor(Math.random() * (max - min)) + min;
@@ -166,6 +169,7 @@ export default defineComponent({
   },
 });
 </script>
+
 <style lang="scss" scoped>
 .q-item.q-router-link--active {
   .image-primary-filter {

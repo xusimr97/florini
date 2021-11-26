@@ -1,12 +1,5 @@
 <template>
   <div class="container form">
-    <!-- <q-card-section>
-      <router-link to="/">
-        <div class="row justify-center items-center">
-          <img src="logo.svg" alt="Canini" class="logo-img" />
-        </div>
-      </router-link>
-    </q-card-section> -->
     <q-card-section>
       <div class="text-h5 q-mb-sm text-weight-bold">
         {{ $t("login") }}
@@ -161,6 +154,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .form {
   max-width: 500px;

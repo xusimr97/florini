@@ -28,6 +28,12 @@ export default {
   // Home
   home: 'Inicio',
   customersForm: 'Formulario Usuarios',
+  es: 'Es',
+  en: 'En',
+  published: 'Publicado',
+  hidden: 'Oculto',
+  post: 'Publicación',
+  slider: 'Slider',
 
   // Login
   login: 'Iniciar sesión',
@@ -68,6 +74,7 @@ export default {
 
   // Products
   categories: 'Categorías',
+  products: 'Productos',
 
   // Last
   last: 'Last'
