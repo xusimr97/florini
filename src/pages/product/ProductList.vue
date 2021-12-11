@@ -71,7 +71,9 @@
 
         <q-card-section
           class="product-card-info"
-          @click="$router.push({ name: 'item', params: { id: item.id } })"
+          @click="
+            $router.push({ name: 'product', params: { id: item.id } })
+          "
         >
           <div class="name text-h6 text-justify">
             {{ item.productVersions[0]?.productVersionTranslations[0].title }}

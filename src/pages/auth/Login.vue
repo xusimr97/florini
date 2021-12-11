@@ -119,7 +119,7 @@ export default {
         await this.getUser(res.data.userId);
       } catch (error) {
         if (error.message !== "Firebase: Error (auth/popup-closed-by-user).") {
-          this.handleError(error, this);
+          this.errorHandler(error, this);
         }
       }
     },
@@ -137,7 +137,7 @@ export default {
         await this.getUser(res.data.userId);
       } catch (error) {
         if (error.message !== "Firebase: Error (auth/popup-closed-by-user).") {
-          this.handleError(error, this);
+          this.errorHandler(error, this);
         }
       }
     },
