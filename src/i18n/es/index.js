@@ -77,6 +77,14 @@ export default {
   products: 'Productos',
   noProducts: 'No hay productos en esta categoría',
 
+    // Tags Value
+    yes:'Si',
+    no:'No',
+    red:'Rojo',
+    blue:'Azul',
+    yelow:'Amarillo',
+    green:'Verde',
+
   // Last
   last: 'Last'
 }

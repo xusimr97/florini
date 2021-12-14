@@ -35,6 +35,7 @@
         <product-actions
           :versions="productVersions"
           :current-version="currentProductVersion"
+          :tag-options="tags"
         />
       </div>
     </div>
@@ -78,6 +79,7 @@ export default {
       productVersions: [],
       currentProductVersion: {},
       imageBasePath: process.env.imageUrl,
+      tags: [],
     };
   },
   components: {
@@ -102,7 +104,7 @@ export default {
   methods: {
     async getProductData(id) {
       try {
-        let params = {
+        let params1 = {
           filter: {
             include: [
               {
@@ -126,17 +128,7 @@ export default {
                       scope: {
                         include: [
                           {
-                            relation: "tag",
-                            scope: {
-                              include: [
-                                {
-                                  relation: "tagTranslations",
-                                  scope: {
-                                    where: { locale: this.$i18n.locale },
-                                  },
-                                },
-                              ],
-                            },
+                            relation: "tagValue",
                           },
                         ],
                       },
@@ -161,7 +153,30 @@ export default {
             ],
           },
         };
-        const response = await this.$axios.get(`Products/${id}`, { params });
+        let params2 = {
+          filter: {
+            include: [
+              {
+                relation: "tagTranslations",
+                scope: {
+                  where: { locale: this.$i18n.locale },
+                },
+              },
+            ],
+            where: { state: true },
+          },
+        };
+
+        const requests = [
+          this.$axios.get(`Products/${id}`, { params: params1 }),
+          this.$axios.get(`Tags`, { params: params2 }),
+        ];
+
+        const responses = await Promise.all(requests);
+        const response = responses[0];
+        this.tags = responses[1].data;
+
+        console.log(response);
 
         if (!response.data.productVersions.length) {
           throw new TypeError("NO_PRODUCT_VERSIONS");

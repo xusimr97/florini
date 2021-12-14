@@ -32,6 +32,10 @@
 export default {
   name: "ProductActions",
   props: {
+    tagOptions: {
+      type: Array,
+      required: true,
+    },
     versions: {
       type: Array,
       required: true,
@@ -67,18 +71,34 @@ export default {
     orderTags(version) {
       version.tags.forEach((versionTag) => {
         // Add tag to Tags Object
-        if (!this.tags[versionTag.tagId]) {
-          console.log(versionTag.tag.tagTranslations);
-          this.tags[versionTag.tagId] = {
-            id: versionTag.tagId,
-            name: versionTag.tag.tagTranslations[0]?.title,
+        if (!this.tags[versionTag.tagValue.tagId]) {
+          const tagOption = this.tagOptions.find((opt) => {
+            return opt.id === versionTag.tagValue.tagId;
+          });
+
+          this.tags[versionTag.tagValue.tagId] = {
+            id: versionTag.tagValue.tagId,
+            name: tagOption.tagTranslations[0]?.title,
             values: [],
+            type: tagOption.type,
           };
         }
 
-        this.tags[versionTag.tagId].values.push({
-          id: versionTag.id,
-          value: versionTag.value,
+        // Check if already added
+        const alreadyAdded = this.tags[
+          versionTag.tagValue.tagId
+        ].values.findIndex((val) => {
+          return val.id === versionTag.tagValue.id;
+        });
+
+        if (alreadyAdded > -1) {
+          return;
+        }
+
+        const value = this.getValueFromTag(versionTag);
+        this.tags[versionTag.tagValue.tagId].values.push({
+          id: versionTag.tagValue.id,
+          value: value,
         });
       });
     },
@@ -91,6 +111,16 @@ export default {
         res = true;
       }
       return res;
+    },
+    getValueFromTag(versionTag) {
+      switch (this.tags[versionTag.tagValue.tagId].type) {
+        case "translatable":
+          return this.$t(versionTag.tagValue.value);
+        case "number":
+          return Number.parseInt(versionTag.tagValue.value);
+        default:
+          return versionTag.tagValue.value;
+      }
     },
   },
   computed: {
