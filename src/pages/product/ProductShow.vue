@@ -6,8 +6,8 @@
   </div>
 
   <div class="container" v-else>
-    <!-- ProductContainer 1 -->
-    <div class="productContainer">
+    <!-- product-container 1 -->
+    <div class="product-container">
       <div class="productImages">
         <!-- Carousel -->
         <q-carousel
@@ -29,19 +29,49 @@
             :img-src="imageBasePath + image.url"
           />
         </q-carousel>
+
+        <!-- Show on Mobile -->
+        <div class="productActions product-actions-mobile q-mt-md">
+          <product-actions
+            :versions="productVersions"
+            :current-version="currentProductVersion"
+            :tag-options="tags"
+          />
+        </div>
+        <q-carousel
+          animated
+          v-model="currentSlide"
+          arrows
+          thumbnails
+          infinite
+          control-color="primary"
+          height="30rem"
+          swipeable
+          transition-prev="slide-right"
+          transition-next="slide-left"
+        >
+          <q-carousel-slide
+            v-for="image in currentProductVersion.images"
+            :key="image.id"
+            :name="image.order"
+            :img-src="imageBasePath + image.url"
+          />
+        </q-carousel>
       </div>
 
-      <div class="productActions">
-        <product-actions
-          :versions="productVersions"
-          :current-version="currentProductVersion"
-          :tag-options="tags"
-        />
+      <div class="productActions product-actions-desktop">
+        <div class="sticky">
+          <product-actions
+            :versions="productVersions"
+            :current-version="currentProductVersion"
+            :tag-options="tags"
+          />
+        </div>
       </div>
     </div>
 
-    <!-- ProductContainer 2 -->
-    <div class="productContainer">
+    <!-- product-container 2 -->
+    <div class="product-container">
       <div class="productDetails">
         <!-- Carousel -->
         <q-carousel
@@ -194,7 +224,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.productContainer {
+.product-container {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -208,12 +238,30 @@ export default {
   .productActions {
     flex-basis: 25rem;
     flex-grow: 1;
+
+    .sticky {
+      position: sticky;
+      top: 60px;
+    }
   }
 
   .productDetails {
     flex-basis: 0;
     flex-grow: 999;
     min-width: 60%;
+  }
+}
+
+.product-actions-desktop {
+  display: none;
+  @media (min-width: 1200px) {
+    display: block;
+  }
+}
+.product-actions-mobile {
+  display: block;
+  @media (min-width: 1200px) {
+    display: none;
   }
 }
 </style>

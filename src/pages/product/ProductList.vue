@@ -15,6 +15,7 @@
             }}</q-item-label>
           </q-item-section>
         </q-item>
+        <!-- TODO -->
         <!-- <q-expansion-item
           expand-separator
           v-for="category in categories"
