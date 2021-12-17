@@ -8,6 +8,8 @@
 
     <!-- Tag Items -->
     <div class="row justify-start items-start q-gutter-sm">
+      <!-- TODO           'tag-affect-other-values': checkTagAffectOtherValues(tagValue),
+ -->
       <div
         :class="{
           'tag-option': true,
@@ -17,7 +19,6 @@
           'items-center': true,
           'relative-position': true,
           'tag-selected': checkTagSelected(tagValue),
-          'tag-affect-other-values': checkTagAffectOtherValues(tagValue),
         }"
         v-for="tagValue in tag.values"
         :key="tagValue.id"
@@ -47,6 +48,9 @@ export default {
       required: true,
     },
   },
+  emits: {
+    onChangeVersion: null,
+  },
   data() {
     return {
       loading: false,
@@ -58,7 +62,7 @@ export default {
       this.loading = true;
       if (this.versions?.length) {
         this.versions.forEach((version) => {
-          this.orderTags(version);
+          this.createTagStructure(version);
         });
       }
     } catch (error) {
@@ -69,7 +73,7 @@ export default {
   },
 
   methods: {
-    orderTags(version) {
+    createTagStructure(version) {
       version.tags.forEach((versionTag) => {
         // Add tag to Tags Object
         if (!this.tags[versionTag.tagValue.tagId]) {
@@ -96,10 +100,11 @@ export default {
           return;
         }
 
-        const value = this.getValueFromTag(versionTag);
+        const value = this.getLabelHTMLFromTag(versionTag);
         this.tags[versionTag.tagValue.tagId].values.push({
           id: versionTag.tagValue.id,
           value: value,
+          tagId: versionTag.tagValue.tagId,
         });
       });
     },
@@ -114,16 +119,20 @@ export default {
       }
       return res;
     },
+    // TODO
     checkTagAffectOtherValues(tag) {
-      let res = false;
       let currentVersionTags = this.getVersionTags(this.currentVersion);
       let otherVersions = this.getOtherVersions();
       // Find at least 1 version
       return !otherVersions.some((version) => {
         // Check if all tags meet the condition
-        return currentVersionTags.every((currentVersionTag) => {
-          return this.checkTagInsideVersion(currentVersionTag, version);
-        });
+        const noCoincidenceTags = currentVersionTags.filter(
+          (currentVersionTag) => {
+            return !this.checkTagInsideVersion(currentVersionTag, version);
+          }
+        );
+        // console.log(noCoincidenceTags);
+        return noCoincidenceTags.length > 1;
       });
     },
     getVersionTags(version) {
@@ -131,6 +140,7 @@ export default {
         return {
           tagId: versionTag.tagValue.tagId,
           tagValueId: versionTag.tagValue.id,
+          value: versionTag.tagValue.value,
         };
       });
     },
@@ -141,7 +151,7 @@ export default {
         }) > -1
       );
     },
-    getValueFromTag(versionTag) {
+    getLabelHTMLFromTag(versionTag) {
       switch (this.tags[versionTag.tagValue.tagId].type) {
         case "translatable":
           return this.$t(versionTag.tagValue.value);
@@ -171,10 +181,17 @@ export default {
       return array;
     },
     setTagValue(tagValue) {
+      const existTagInsideCurrentVersion = this.checkTagInsideVersion(
+        { tagValueId: tagValue.id },
+        this.currentVersion
+      );
+      if (existTagInsideCurrentVersion) {
+        return;
+      }
+
       const version = this.findVersionWithLessChanges(tagValue);
       if (version) {
-        // TODO: Notify Parent with version
-        console.log(version);
+        this.$emit("onChangeVersion", version);
       }
     },
     findVersionWithLessChanges(tagValue) {

@@ -1,99 +1,62 @@
 <template>
-  <div class="q-my-xl"></div>
-  <!-- Spinner -->
-  <div class="flex flex-center" v-if="loading">
-    <q-spinner color="primary" size="50px"> </q-spinner>
-  </div>
-
-  <div class="container" v-else>
-    <!-- product-container 1 -->
-    <div class="product-container">
-      <div class="productImages">
-        <!-- Carousel -->
-        <q-carousel
-          animated
-          v-model="currentSlide"
-          arrows
-          thumbnails
-          infinite
-          control-color="primary"
-          height="30rem"
-          swipeable
-          transition-prev="slide-right"
-          transition-next="slide-left"
-        >
-          <q-carousel-slide
-            v-for="image in currentProductVersion.images"
-            :key="image.id"
-            :name="image.order"
-            :img-src="imageBasePath + image.url"
-          />
-        </q-carousel>
-
-        <!-- Show on Mobile -->
-        <div class="productActions product-actions-mobile q-mt-md">
-          <product-actions
-            :versions="productVersions"
-            :current-version="currentProductVersion"
-            :tag-options="tags"
-          />
-        </div>
-        <q-carousel
-          animated
-          v-model="currentSlide"
-          arrows
-          thumbnails
-          infinite
-          control-color="primary"
-          height="30rem"
-          swipeable
-          transition-prev="slide-right"
-          transition-next="slide-left"
-        >
-          <q-carousel-slide
-            v-for="image in currentProductVersion.images"
-            :key="image.id"
-            :name="image.order"
-            :img-src="imageBasePath + image.url"
-          />
-        </q-carousel>
-      </div>
-
-      <div class="productActions product-actions-desktop">
-        <div class="sticky">
-          <product-actions
-            :versions="productVersions"
-            :current-version="currentProductVersion"
-            :tag-options="tags"
-          />
-        </div>
-      </div>
+  <div class="q-my-xl">
+    <!-- Spinner -->
+    <div class="flex flex-center" v-if="loading">
+      <q-spinner color="primary" size="50px"> </q-spinner>
     </div>
 
-    <!-- product-container 2 -->
-    <div class="product-container">
-      <div class="productDetails">
-        <!-- Carousel -->
-        <q-carousel
-          animated
-          v-model="currentSlide"
-          arrows
-          infinite
-          height="30rem"
-          swipeable
-          transition-prev="slide-right"
-          transition-next="slide-left"
-          thumbnails
-        >
-          <q-carousel-slide
-            v-for="image in currentProductVersion.images"
-            :key="image.id"
-            :name="image.order"
-            :img-src="imageBasePath + image.url"
-          />
-        </q-carousel>
+    <div class="container" v-else>
+      <!-- product-container 1 -->
+      <div class="product-container">
+        <div class="productImages">
+          <!-- Carousel -->
+          <q-carousel
+            animated
+            v-model="currentSlide"
+            arrows
+            thumbnails
+            infinite
+            control-color="primary"
+            height="30rem"
+            swipeable
+            transition-prev="slide-right"
+            transition-next="slide-left"
+          >
+            <q-carousel-slide
+              v-for="image in currentProductVersion.images"
+              :key="image.id"
+              :name="image.order"
+              :img-src="imageBasePath + image.url"
+            />
+          </q-carousel>
+
+          <!-- Show on Mobile -->
+          <div class="productActions product-actions-mobile q-mt-md">
+            <product-actions
+              :versions="productVersions"
+              :current-version="currentProductVersion"
+              :tag-options="tags"
+              @on-change-version="changeVersion($event)"
+            />
+          </div>
+
+          <!-- Description -->
+          <div class="text-body1 text-justify q-mt-md">
+            {{ getDescription }}
+          </div>
+        </div>
+
+        <div class="productActions product-actions-desktop">
+          <div class="sticky">
+            <product-actions
+              :versions="productVersions"
+              :current-version="currentProductVersion"
+              :tag-options="tags"
+              @on-change-version="changeVersion($event)"
+            />
+          </div>
+        </div>
       </div>
-      <div class="productActions"></div>
     </div>
   </div>
 </template>
@@ -218,6 +181,18 @@ export default {
       } catch (error) {
         this.errorHandler(error, this);
       }
+    },
+
+    changeVersion(version) {
+      this.currentProductVersion = version;
+    },
+  },
+  computed: {
+    getDescription() {
+      if (Object.keys(this.currentProductVersion).length) {
+        return this.currentProductVersion.productVersionTranslations[0].text;
+      }
+      return "";
     },
   },
 };
